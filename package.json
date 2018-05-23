@@ -52,7 +52,8 @@
     "watch:test": "npm-run-all -p watch:test:manifest watch:test:js watch:test:webpack watch:test:browserify",
     "watch:test:js": "node scripts/watch-test.js",
     "watch:test:manifest": "node -e \"var b=require('./scripts/manifest-data.js'); b.watch();\"",
-    "prepublish": "not-in-install && npm run build || in-install"
+    "prepublish": "not-in-install && npm run build || in-install",
+    "postinstall": "npm run build"
   },
   "keywords": [
     "videojs",
