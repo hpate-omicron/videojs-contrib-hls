@@ -53,7 +53,7 @@
     "watch:test:js": "node scripts/watch-test.js",
     "watch:test:manifest": "node -e \"var b=require('./scripts/manifest-data.js'); b.watch();\"",
     "prepublish": "not-in-install && npm run build || in-install",
-    "postinstall": "npm run build"
+    "postinstall": "npm-run-all -p build:js:*"
   },
   "keywords": [
     "videojs",
