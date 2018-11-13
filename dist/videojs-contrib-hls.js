@@ -19263,7 +19263,7 @@ var HtmlMediaSource = (function (_videojs$EventTarget) {
     function findVideoPlayer(url) {
       var videoPlayers = _globalDocument2['default'].querySelectorAll('video-player');
       for (var i = 0; i < videoPlayers.length; i++) {
-        var elem = videoPlayer[i].shadowRoot && videoPlayer[i].shadowRoot.querySelector('[src="' + e.url_ + '"]');
+        var elem = videoPlayers[i].shadowRoot && videoPlayers[i].shadowRoot.querySelector('[src="' + url + '"]');
 
         if (elem) return elem;
       }
