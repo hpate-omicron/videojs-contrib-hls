@@ -83,23 +83,23 @@
 
 	var _playlistLoader2 = _interopRequireDefault(_playlistLoader);
 
-	var _playlist = __webpack_require__(26);
+	var _playlist = __webpack_require__(27);
 
 	var _playlist2 = _interopRequireDefault(_playlist);
 
-	var _xhr = __webpack_require__(27);
+	var _xhr = __webpack_require__(28);
 
 	var _xhr2 = _interopRequireDefault(_xhr);
 
-	var _aesDecrypter = __webpack_require__(28);
+	var _aesDecrypter = __webpack_require__(29);
 
-	var _binUtils = __webpack_require__(36);
+	var _binUtils = __webpack_require__(37);
 
 	var _binUtils2 = _interopRequireDefault(_binUtils);
 
-	var _videojsContribMediaSources = __webpack_require__(37);
+	var _videojsContribMediaSources = __webpack_require__(38);
 
-	var _m3u8Parser = __webpack_require__(21);
+	var _m3u8Parser = __webpack_require__(22);
 
 	var _m3u8Parser2 = _interopRequireDefault(_m3u8Parser);
 
@@ -107,13 +107,13 @@
 
 	var _videoJs2 = _interopRequireDefault(_videoJs);
 
-	var _masterPlaylistController = __webpack_require__(71);
+	var _masterPlaylistController = __webpack_require__(72);
 
-	var _config = __webpack_require__(74);
+	var _config = __webpack_require__(75);
 
 	var _config2 = _interopRequireDefault(_config);
 
-	var _renditionMixin = __webpack_require__(88);
+	var _renditionMixin = __webpack_require__(89);
 
 	var _renditionMixin2 = _interopRequireDefault(_renditionMixin);
 
@@ -121,15 +121,15 @@
 
 	var _globalWindow2 = _interopRequireDefault(_globalWindow);
 
-	var _playbackWatcher = __webpack_require__(89);
+	var _playbackWatcher = __webpack_require__(90);
 
 	var _playbackWatcher2 = _interopRequireDefault(_playbackWatcher);
 
-	var _reloadSourceOnError = __webpack_require__(90);
+	var _reloadSourceOnError = __webpack_require__(91);
 
 	var _reloadSourceOnError2 = _interopRequireDefault(_reloadSourceOnError);
 
-	var _playlistSelectorsJs = __webpack_require__(77);
+	var _playlistSelectorsJs = __webpack_require__(78);
 
 	var Hls = {
 	  PlaylistLoader: _playlistLoader2['default'],
@@ -809,7 +809,7 @@
 
 	var _videoJs = __webpack_require__(8);
 
-	var _m3u8Parser = __webpack_require__(21);
+	var _m3u8Parser = __webpack_require__(22);
 
 	var _m3u8Parser2 = _interopRequireDefault(_m3u8Parser);
 
@@ -1430,8 +1430,8 @@
 	(function(root) { 
 	/* jshint ignore:end */
 
-	  var URL_REGEX = /^((?:[a-zA-Z0-9+\-.]+:)?)(\/\/[^\/\;?#]*)?(.*?)??(;.*?)?(\?.*?)?(#.*?)?$/;
-	  var FIRST_SEGMENT_REGEX = /^([^\/;?#]*)(.*)$/;
+	  var URL_REGEX = /^((?:[a-zA-Z0-9+\-.]+:)?)(\/\/[^\/?#]*)?((?:[^\/\?#]*\/)*.*?)??(;.*?)?(\?.*?)?(#.*?)?$/;
+	  var FIRST_SEGMENT_REGEX = /^([^\/?#]*)(.*)$/;
 	  var SLASH_DOT_REGEX = /(?:\/|^)\.(?=\/)/g;
 	  var SLASH_DOT_DOT_REGEX = /(?:\/|^)\.\.\/(?!\.\.\/).*?(?=\/)/g;
 
@@ -1615,7 +1615,7 @@
 
 	/**
 	 * @license
-	 * Video.js 6.10.1 <http://videojs.com/>
+	 * Video.js 6.12.1 <http://videojs.com/>
 	 * Copyright Brightcove, Inc. <https://www.brightcove.com/>
 	 * Available under Apache License Version 2.0
 	 * <https://github.com/videojs/video.js/blob/master/LICENSE>
@@ -1632,9 +1632,9 @@
 	var tsml = _interopDefault(__webpack_require__(9));
 	var safeParseTuple = _interopDefault(__webpack_require__(10));
 	var xhr = _interopDefault(__webpack_require__(11));
-	var vtt = _interopDefault(__webpack_require__(17));
+	var vtt = _interopDefault(__webpack_require__(18));
 
-	var version = "6.10.1";
+	var version = "6.12.1";
 
 	/**
 	 * @file browser.js
@@ -1696,12 +1696,12 @@
 
 	var IS_FIREFOX = /Firefox/i.test(USER_AGENT);
 	var IS_EDGE = /Edge/i.test(USER_AGENT);
-	var IS_CHROME = !IS_EDGE && /Chrome/i.test(USER_AGENT);
+	var IS_CHROME = !IS_EDGE && (/Chrome/i.test(USER_AGENT) || /CriOS/i.test(USER_AGENT));
 	var CHROME_VERSION = function () {
-	  var match = USER_AGENT.match(/Chrome\/(\d+)/);
+	  var match = USER_AGENT.match(/(Chrome|CriOS)\/(\d+)/);
 
-	  if (match && match[1]) {
-	    return parseFloat(match[1]);
+	  if (match && match[2]) {
+	    return parseFloat(match[2]);
 	  }
 	  return null;
 	}();
@@ -1719,9 +1719,9 @@
 	}();
 
 	var IS_SAFARI = /Safari/i.test(USER_AGENT) && !IS_CHROME && !IS_ANDROID && !IS_EDGE;
-	var IS_ANY_SAFARI = IS_SAFARI || IS_IOS;
+	var IS_ANY_SAFARI = (IS_SAFARI || IS_IOS) && !IS_CHROME;
 
-	var TOUCH_ENABLED = isReal() && ('ontouchstart' in window || window.DocumentTouch && window.document instanceof window.DocumentTouch);
+	var TOUCH_ENABLED = isReal() && ('ontouchstart' in window || window.navigator.maxTouchPoints || window.DocumentTouch && window.document instanceof window.DocumentTouch);
 
 	var BACKGROUND_SIZE_SUPPORTED = isReal() && 'backgroundSize' in window.document.createElement('video').style;
 
@@ -6069,9 +6069,9 @@
 	   *    {@link Component#dispose} gets called.
 	   * 2. The function callback will gets turned into a {@link Component~GenericCallback}
 	   *
-	   * > Note: You can use `window.clearTimeout` on the id returned by this function. This
+	   * > Note: You can't use `window.clearTimeout` on the id returned by this function. This
 	   *         will cause its dispose listener not to get cleaned up! Please use
-	   *         {@link Component#clearTimeout} or {@link Component#dispose}.
+	   *         {@link Component#clearTimeout} or {@link Component#dispose} instead.
 	   *
 	   * @param {Component~GenericCallback} fn
 	   *        The function that will be run after `timeout`.
@@ -6092,10 +6092,18 @@
 	  Component.prototype.setTimeout = function setTimeout(fn, timeout) {
 	    var _this2 = this;
 
+	    // declare as variables so they are properly available in timeout function
+	    // eslint-disable-next-line
+	    var timeoutId, disposeFn;
+
 	    fn = bind(this, fn);
 
-	    var timeoutId = window.setTimeout(fn, timeout);
-	    var disposeFn = function disposeFn() {
+	    timeoutId = window.setTimeout(function () {
+	      _this2.off('dispose', disposeFn);
+	      fn();
+	    }, timeout);
+
+	    disposeFn = function disposeFn() {
 	      return _this2.clearTimeout(timeoutId);
 	    };
 
@@ -6234,11 +6242,19 @@
 	  Component.prototype.requestAnimationFrame = function requestAnimationFrame(fn) {
 	    var _this4 = this;
 
+	    // declare as variables so they are properly available in rAF function
+	    // eslint-disable-next-line
+	    var id, disposeFn;
+
 	    if (this.supportsRaf_) {
 	      fn = bind(this, fn);
 
-	      var id = window.requestAnimationFrame(fn);
-	      var disposeFn = function disposeFn() {
+	      id = window.requestAnimationFrame(function () {
+	        _this4.off('dispose', disposeFn);
+	        fn();
+	      });
+
+	      disposeFn = function disposeFn() {
 	        return _this4.cancelAnimationFrame(id);
 	      };
 
@@ -8777,9 +8793,8 @@
 	      // Accessing this.activeCues for the side-effects of updating itself
 	      // due to it's nature as a getter function. Do not remove or cues will
 	      // stop updating!
-	      /* eslint-disable no-unused-expressions */
-	      this.activeCues;
-	      /* eslint-enable no-unused-expressions */
+	      // Use the setter to prevent deletion from uglify (pure_getters rule)
+	      this.activeCues = this.activeCues;
 	      if (changed) {
 	        this.trigger('cuechange');
 	        changed = false;
@@ -8911,6 +8926,9 @@
 
 	        return activeCues;
 	      },
+
+
+	      // /!\ Keep this setter empty (see the timeupdate handler above)
 	      set: function set$$1() {}
 	    });
 
@@ -10478,7 +10496,15 @@
 	Tech.prototype.featuresVolumeControl = true;
 
 	/**
-	 * Boolean indicating wether the `Tech` support fullscreen resize control.
+	 * Boolean indicating whether the `Tech` supports muting volume.
+	 *
+	 * @type {bolean}
+	 * @default
+	 */
+	Tech.prototype.featuresMuteControl = true;
+
+	/**
+	 * Boolean indicating whether the `Tech` supports fullscreen resize control.
 	 * Resizing plugins using request fullscreen reloads the plugin
 	 *
 	 * @type {boolean}
@@ -10922,6 +10948,12 @@
 	    // then call the mw's setSource method
 	  } else if (mwFactory) {
 	    var mw = getOrCreateFactory(player, mwFactory);
+
+	    // if setSource isn't present, implicitly select this middleware
+	    if (!mw.setSource) {
+	      acc.push(mw);
+	      return setSourceHelper(src, mwrest, next, player, acc, lastRun);
+	    }
 
 	    mw.setSource(assign({}, src), function (err, _src) {
 
@@ -11580,7 +11612,7 @@
 	    }
 
 	    if (this.player_.paused()) {
-	      this.player_.play();
+	      silencePromise(this.player_.play());
 	    } else {
 	      this.player_.pause();
 	    }
@@ -11613,20 +11645,27 @@
 	 * Construct an rgba color from a given hex color code.
 	 *
 	 * @param {number} color
-	 *        Hex number for color, like #f0e.
+	 *        Hex number for color, like #f0e or #f604e2.
 	 *
 	 * @param {number} opacity
 	 *        Value for opacity, 0.0 - 1.0.
 	 *
 	 * @return {string}
 	 *         The rgba color that was created, like 'rgba(255, 0, 0, 0.3)'.
-	 *
-	 * @private
 	 */
 	function constructColor(color, opacity) {
-	  return 'rgba(' +
-	  // color looks like "#f0e"
-	  parseInt(color[1] + color[1], 16) + ',' + parseInt(color[2] + color[2], 16) + ',' + parseInt(color[3] + color[3], 16) + ',' + opacity + ')';
+	  var hex = void 0;
+
+	  if (color.length === 4) {
+	    // color looks like "#f0e"
+	    hex = color[1] + color[1] + color[2] + color[2] + color[3] + color[3];
+	  } else if (color.length === 7) {
+	    // color looks like "#f604e2"
+	    hex = color.slice(1);
+	  } else {
+	    throw new Error('Invalid color code provided, ' + color + '; must be formatted as e.g. #f0e or #f604e2.');
+	  }
+	  return 'rgba(' + parseInt(hex.slice(0, 2), 16) + ',' + parseInt(hex.slice(2, 4), 16) + ',' + parseInt(hex.slice(4, 6), 16) + ',' + opacity + ')';
 	}
 
 	/**
@@ -12185,6 +12224,7 @@
 
 	    // exit early if clicked via the mouse
 	    if (this.mouseused_ && event.clientX && event.clientY) {
+	      silencePromise(playPromise);
 	      return;
 	    }
 
@@ -13315,7 +13355,16 @@
 	  Slider.prototype.handleMouseDown = function handleMouseDown(event) {
 	    var doc = this.bar.el_.ownerDocument;
 
-	    event.preventDefault();
+	    if (event.type === 'mousedown') {
+	      event.preventDefault();
+	    }
+	    // Do not call preventDefault() on touchstart in Chrome
+	    // to avoid console warnings. Use a 'touch-action: none' style
+	    // instead to prevent unintented scrolling.
+	    // https://developers.google.com/web/updates/2017/01/scrolling-intervention
+	    if (event.type === 'touchstart' && !IS_CHROME) {
+	      event.preventDefault();
+	    }
 	    blockTextSelection();
 
 	    this.addClass('vjs-sliding');
@@ -14574,6 +14623,10 @@
 	    var _this = possibleConstructorReturn(this, _Button.call(this, player, options));
 
 	    _this.on(player, 'fullscreenchange', _this.handleFullscreenChange);
+
+	    if (document[FullscreenApi.fullscreenEnabled] === false) {
+	      _this.disable();
+	    }
 	    return _this;
 	  }
 
@@ -15070,6 +15123,33 @@
 	Component.registerComponent('VolumeControl', VolumeControl);
 
 	/**
+	 * Check if muting volume is supported and if it isn't hide the mute toggle
+	 * button.
+	 *
+	 * @param {Component} self
+	 *        A reference to the mute toggle button
+	 *
+	 * @param {Player} player
+	 *        A reference to the player
+	 *
+	 * @private
+	 */
+	var checkMuteSupport = function checkMuteSupport(self, player) {
+	  // hide mute toggle button if it's not supported by the current tech
+	  if (player.tech_ && !player.tech_.featuresMuteControl) {
+	    self.addClass('vjs-hidden');
+	  }
+
+	  self.on(player, 'loadstart', function () {
+	    if (!player.tech_.featuresMuteControl) {
+	      self.addClass('vjs-hidden');
+	    } else {
+	      self.removeClass('vjs-hidden');
+	    }
+	  });
+	};
+
+	/**
 	 * @file mute-toggle.js
 	 */
 	/**
@@ -15096,7 +15176,7 @@
 	    // hide this control if volume support is missing
 	    var _this = possibleConstructorReturn(this, _Button.call(this, player, options));
 
-	    checkVolumeSupport(_this, player);
+	    checkMuteSupport(_this, player);
 
 	    _this.on(player, ['loadstart', 'volumechange'], _this.update);
 	    return _this;
@@ -15175,6 +15255,13 @@
 	  MuteToggle.prototype.updateIcon_ = function updateIcon_() {
 	    var vol = this.player_.volume();
 	    var level = 3;
+
+	    // in iOS when a player is loaded with muted attribute
+	    // and volume is changed with a native mute button
+	    // we want to make sure muted state is updated
+	    if (IS_IOS) {
+	      this.player_.muted(this.player_.tech_.el_.muted);
+	    }
 
 	    if (vol === 0 || this.player_.muted()) {
 	      level = 0;
@@ -15264,10 +15351,9 @@
 	      options.volumeControl.vertical = !options.inline;
 	    }
 
-	    // hide this control if volume support is missing
 	    var _this = possibleConstructorReturn(this, _Component.call(this, player, options));
 
-	    checkVolumeSupport(_this, player);
+	    _this.on(player, ['loadstart'], _this.volumePanelState_);
 
 	    // while the slider is active (the mouse has been pressed down and
 	    // is dragging) we do not want to hide the VolumeBar
@@ -15299,6 +15385,29 @@
 
 	  VolumePanel.prototype.sliderInactive_ = function sliderInactive_() {
 	    this.removeClass('vjs-slider-active');
+	  };
+
+	  /**
+	   * Adds vjs-hidden or vjs-mute-toggle-only to the VolumePanel
+	   * depending on MuteToggle and VolumeControl state
+	   *
+	   * @listens Player#loadstart
+	   * @private
+	   */
+
+
+	  VolumePanel.prototype.volumePanelState_ = function volumePanelState_() {
+	    // hide volume panel if neither volume control or mute toggle
+	    // are displayed
+	    if (this.volumeControl.hasClass('vjs-hidden') && this.muteToggle.hasClass('vjs-hidden')) {
+	      this.addClass('vjs-hidden');
+	    }
+
+	    // if only mute toggle is visible we don't want
+	    // volume panel expanding when hovered or active
+	    if (this.volumeControl.hasClass('vjs-hidden') && !this.muteToggle.hasClass('vjs-hidden')) {
+	      this.addClass('vjs-mute-toggle-only');
+	    }
 	  };
 
 	  /**
@@ -16037,13 +16146,16 @@
 
 	    _this.selectable = options.selectable;
 	    _this.isSelected_ = options.selected || false;
+	    _this.multiSelectable = options.multiSelectable;
 
 	    _this.selected(_this.isSelected_);
 
 	    if (_this.selectable) {
-	      // TODO: May need to be either menuitemcheckbox or menuitemradio,
-	      //       and may need logical grouping of menu items.
-	      _this.el_.setAttribute('role', 'menuitemcheckbox');
+	      if (_this.multiSelectable) {
+	        _this.el_.setAttribute('role', 'menuitemcheckbox');
+	      } else {
+	        _this.el_.setAttribute('role', 'menuitemradio');
+	      }
 	    } else {
 	      _this.el_.setAttribute('role', 'menuitem');
 	    }
@@ -16079,7 +16191,7 @@
 	  };
 
 	  /**
-	   * Any click on a `MenuItem` puts int into the selected state.
+	   * Any click on a `MenuItem` puts it into the selected state.
 	   * See {@link ClickableComponent#handleClick} for instances where this is called.
 	   *
 	   * @param {EventTarget~Event} event
@@ -16354,6 +16466,8 @@
 
 	    // MenuItem is selectable
 	    options.selectable = true;
+	    // MenuItem is NOT multiSelectable (i.e. only one can be marked "selected" at a time)
+	    options.multiSelectable = false;
 
 	    return possibleConstructorReturn(this, _TextTrackMenuItem.call(this, player, options));
 	  }
@@ -16488,7 +16602,9 @@
 	        var item = new TrackMenuItem(this.player_, {
 	          track: track,
 	          // MenuItem is selectable
-	          selectable: true
+	          selectable: true,
+	          // MenuItem is NOT multiSelectable (i.e. only one can be marked "selected" at a time)
+	          multiSelectable: false
 	        });
 
 	        item.addClass('vjs-' + track.kind + '-menu-item');
@@ -16534,6 +16650,7 @@
 
 	    // Modify options for parent MenuItem class's init.
 	    options.selectable = true;
+	    options.multiSelectable = false;
 	    options.label = cue.text;
 	    options.selected = cue.startTime <= currentTime && currentTime < cue.endTime;
 
@@ -17296,6 +17413,8 @@
 
 	    _this.track = track;
 
+	    _this.addClass('vjs-' + track.kind + '-menu-item');
+
 	    var changeHandler = function changeHandler() {
 	      for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
 	        args[_key] = arguments[_key];
@@ -17310,6 +17429,22 @@
 	    });
 	    return _this;
 	  }
+
+	  AudioTrackMenuItem.prototype.createEl = function createEl(type, props, attrs) {
+	    var innerHTML = '<span class="vjs-menu-item-text">' + this.localize(this.options_.label);
+
+	    if (this.options_.track.kind === 'main-desc') {
+	      innerHTML += '\n        <span aria-hidden="true" class="vjs-icon-placeholder"></span>\n        <span class="vjs-control-text"> ' + this.localize('Descriptions') + '</span>\n      ';
+	    }
+
+	    innerHTML += '</span>';
+
+	    var el = _MenuItem.prototype.createEl.call(this, type, assign({
+	      innerHTML: innerHTML
+	    }, props), attrs);
+
+	    return el;
+	  };
 
 	  /**
 	   * This gets called when an `AudioTrackMenuItem is "clicked". See {@link ClickableComponent}
@@ -17426,7 +17561,9 @@
 	      items.push(new AudioTrackMenuItem(this.player_, {
 	        track: track,
 	        // MenuItem is selectable
-	        selectable: true
+	        selectable: true,
+	        // MenuItem is NOT multiSelectable (i.e. only one can be marked "selected" at a time)
+	        multiSelectable: false
 	      }));
 	    }
 
@@ -17478,6 +17615,7 @@
 	    options.label = label;
 	    options.selected = rate === 1;
 	    options.selectable = true;
+	    options.multiSelectable = false;
 
 	    var _this = possibleConstructorReturn(this, _MenuItem.call(this, player, options));
 
@@ -19863,6 +20001,33 @@
 	};
 
 	/**
+	 * Check if the volume can be muted in this browser/device.
+	 * Some devices, e.g. iOS, don't allow changing volume
+	 * but permits muting/unmuting.
+	 *
+	 * @return {bolean}
+	 *      - True if volume can be muted
+	 *      - False otherwise
+	 */
+	Html5.canMuteVolume = function () {
+	  try {
+	    var muted = Html5.TEST_VID.muted;
+
+	    // in some versions of iOS muted property doesn't always
+	    // work, so we want to set both property and attribute
+	    Html5.TEST_VID.muted = !muted;
+	    if (Html5.TEST_VID.muted) {
+	      setAttribute(Html5.TEST_VID, 'muted', 'muted');
+	    } else {
+	      removeAttribute(Html5.TEST_VID, 'muted', 'muted');
+	    }
+	    return muted !== Html5.TEST_VID.muted;
+	  } catch (e) {
+	    return false;
+	  }
+	};
+
+	/**
 	 * Check if the playback rate can be changed in this browser/device.
 	 *
 	 * @return {boolean}
@@ -19922,7 +20087,7 @@
 	 *         - False otherwise
 	 */
 	Html5.supportsNativeTextTracks = function () {
-	  return IS_ANY_SAFARI;
+	  return IS_ANY_SAFARI || IS_IOS && IS_CHROME;
 	};
 
 	/**
@@ -19962,6 +20127,14 @@
 	 * @default {@link Html5.canControlVolume}
 	 */
 	Html5.prototype.featuresVolumeControl = Html5.canControlVolume();
+
+	/**
+	 * Boolean indicating whether the `Tech` supports muting volume.
+	 *
+	 * @type {bolean}
+	 * @default {@link Html5.canMuteVolume}
+	 */
+	Html5.prototype.featuresMuteControl = Html5.canMuteVolume();
 
 	/**
 	 * Boolean indicating whether the `Tech` supports changing the speed at which the media
@@ -21138,6 +21311,15 @@
 	    tag.controls = false;
 	    tag.removeAttribute('controls');
 
+	    // the attribute overrides the option
+	    if (tag.hasAttribute('autoplay')) {
+	      _this.options_.autoplay = true;
+	    } else {
+	      // otherwise use the setter to validate and
+	      // set the correct value.
+	      _this.autoplay(_this.options_.autoplay);
+	    }
+
 	    /*
 	     * Store the internal state of scrubbing
 	     *
@@ -21346,8 +21528,15 @@
 	      });
 	    }
 
-	    // set tabindex to -1 so we could focus on the player element
+	    // set tabindex to -1 to remove the video element from the focus order
 	    tag.setAttribute('tabindex', '-1');
+	    // Workaround for #4583 (JAWS+IE doesn't announce BPB or play button)
+	    // See https://github.com/FreedomScientific/VFO-standards-support/issues/78
+	    // Note that we can't detect if JAWS is being used, but this ARIA attribute
+	    //  doesn't change behavior of IE11 if JAWS is not being used
+	    if (IE_VERSION) {
+	      tag.setAttribute('role', 'application');
+	    }
 
 	    // Remove width/height attrs from tag so CSS can make it 100% width/height
 	    tag.removeAttribute('width');
@@ -21695,13 +21884,17 @@
 	    // Turn off API access because we're loading a new tech that might load asynchronously
 	    this.isReady_ = false;
 
+	    // if autoplay is a string we pass false to the tech
+	    // because the player is going to handle autoplay on `loadstart`
+	    var autoplay = typeof this.autoplay() === 'string' ? false : this.autoplay();
+
 	    // Grab tech-specific options from player options and add source and parent element to use.
 	    var techOptions = {
 	      source: source,
+	      autoplay: autoplay,
 	      'nativeControlsForTouch': this.options_.nativeControlsForTouch,
 	      'playerId': this.id(),
 	      'techId': this.id() + '_' + titleTechName + '_api',
-	      'autoplay': this.options_.autoplay,
 	      'playsinline': this.options_.playsinline,
 	      'preload': this.options_.preload,
 	      'loop': this.options_.loop,
@@ -21988,6 +22181,69 @@
 	      this.hasStarted(false);
 	      this.trigger('loadstart');
 	    }
+
+	    // autoplay happens after loadstart for the browser,
+	    // so we mimic that behavior
+	    this.manualAutoplay_(this.autoplay());
+	  };
+
+	  /**
+	   * Handle autoplay string values, rather than the typical boolean
+	   * values that should be handled by the tech. Note that this is not
+	   * part of any specification. Valid values and what they do can be
+	   * found on the autoplay getter at Player#autoplay()
+	   */
+
+
+	  Player.prototype.manualAutoplay_ = function manualAutoplay_(type) {
+	    var _this4 = this;
+
+	    if (!this.tech_ || typeof type !== 'string') {
+	      return;
+	    }
+
+	    var muted = function muted() {
+	      var previouslyMuted = _this4.muted();
+
+	      _this4.muted(true);
+
+	      var playPromise = _this4.play();
+
+	      if (!playPromise || !playPromise.then || !playPromise['catch']) {
+	        return;
+	      }
+
+	      return playPromise['catch'](function (e) {
+	        // restore old value of muted on failure
+	        _this4.muted(previouslyMuted);
+	      });
+	    };
+
+	    var promise = void 0;
+
+	    if (type === 'any') {
+	      promise = this.play();
+
+	      if (promise && promise.then && promise['catch']) {
+	        promise['catch'](function () {
+	          return muted();
+	        });
+	      }
+	    } else if (type === 'muted') {
+	      promise = muted();
+	    } else {
+	      promise = this.play();
+	    }
+
+	    if (!promise || !promise.then || !promise['catch']) {
+	      return;
+	    }
+
+	    return promise.then(function () {
+	      _this4.trigger({ type: 'autoplay-success', autoplay: type });
+	    })['catch'](function (e) {
+	      _this4.trigger({ type: 'autoplay-failure', autoplay: type });
+	    });
 	  };
 
 	  /**
@@ -22014,6 +22270,14 @@
 	      src = srcObj.src;
 	      type = srcObj.type;
 	    }
+
+	    // if we are a blob url, don't update the source cache
+	    // blob urls can arise when playback is done via Media Source Extension (MSE)
+	    // such as m3u8 sources with @videojs/http-streaming (VHS)
+	    if (/^blob:/.test(src)) {
+	      return;
+	    }
+
 	    // make sure all the caches are set to default values
 	    // to prevent null checking
 	    this.cache_.source = this.cache_.source || {};
@@ -22025,7 +22289,7 @@
 	    }
 
 	    // update `currentSource` cache always
-	    this.cache_.source = { src: src, type: type };
+	    this.cache_.source = mergeOptions({}, srcObj, { src: src, type: type });
 
 	    var matchingSources = this.cache_.sources.filter(function (s) {
 	      return s.src && s.src === src;
@@ -22096,7 +22360,7 @@
 
 
 	  Player.prototype.handleTechSourceset_ = function handleTechSourceset_(event) {
-	    var _this4 = this;
+	    var _this5 = this;
 
 	    // only update the source cache when the source
 	    // was not updated using the player api
@@ -22112,10 +22376,10 @@
 	      if (!event.src) {
 	        var updateCache = function updateCache(e) {
 	          if (e.type !== 'sourceset') {
-	            _this4.updateSourceCaches_(_this4.techGet_('currentSrc'));
+	            _this5.updateSourceCaches_(_this5.techGet_('currentSrc'));
 	          }
 
-	          _this4.tech_.off(['sourceset', 'loadstart'], updateCache);
+	          _this5.tech_.off(['sourceset', 'loadstart'], updateCache);
 	        };
 
 	        this.tech_.one(['sourceset', 'loadstart'], updateCache);
@@ -22229,7 +22493,7 @@
 
 
 	  Player.prototype.handleTechWaiting_ = function handleTechWaiting_() {
-	    var _this5 = this;
+	    var _this6 = this;
 
 	    this.addClass('vjs-waiting');
 	    /**
@@ -22240,7 +22504,7 @@
 	     */
 	    this.trigger('waiting');
 	    this.one('timeupdate', function () {
-	      return _this5.removeClass('vjs-waiting');
+	      return _this6.removeClass('vjs-waiting');
 	    });
 	  };
 
@@ -22352,7 +22616,7 @@
 	   * @fires Player#firstplay
 	   * @listens Tech#firstplay
 	   * @deprecated As of 6.0 firstplay event is deprecated.
-	   * @deprecated As of 6.0 passing the `starttime` option to the player and the firstplay event are deprecated.
+	   *             As of 6.0 passing the `starttime` option to the player and the firstplay event are deprecated.
 	   * @private
 	   */
 
@@ -22461,7 +22725,7 @@
 	    }
 
 	    if (this.paused()) {
-	      this.play();
+	      silencePromise(this.play());
 	    } else {
 	      this.pause();
 	    }
@@ -22719,14 +22983,43 @@
 	   * Attempt to begin playback at the first opportunity.
 	   *
 	   * @return {Promise|undefined}
-	   *         Returns a `Promise` only if the browser returns one and the player
-	   *         is ready to begin playback. For some browsers and all non-ready
-	   *         situations, this will return `undefined`.
+	   *         Returns a promise if the browser supports Promises (or one
+	   *         was passed in as an option). This promise will be resolved on
+	   *         the return value of play. If this is undefined it will fulfill the
+	   *         promise chain otherwise the promise chain will be fulfilled when
+	   *         the promise from play is fulfilled.
 	   */
 
 
 	  Player.prototype.play = function play() {
-	    var _this6 = this;
+	    var _this7 = this;
+
+	    var PromiseClass = this.options_.Promise || window.Promise;
+
+	    if (PromiseClass) {
+	      return new PromiseClass(function (resolve) {
+	        _this7.play_(resolve);
+	      });
+	    }
+
+	    return this.play_();
+	  };
+
+	  /**
+	   * The actual logic for play, takes a callback that will be resolved on the
+	   * return value of play. This allows us to resolve to the play promise if there
+	   * is one on modern browsers.
+	   *
+	   * @private
+	   * @param {Function} [callback]
+	   *        The callback that should be called when the techs play is actually called
+	   */
+
+
+	  Player.prototype.play_ = function play_() {
+	    var _this8 = this;
+
+	    var callback = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : silencePromise;
 
 	    // If this is called while we have a play queued up on a loadstart, remove
 	    // that listener to avoid getting in a potentially bad state.
@@ -22746,13 +23039,14 @@
 
 	      this.playWaitingForReady_ = true;
 	      this.ready(function () {
-	        _this6.playWaitingForReady_ = false;
-	        silencePromise(_this6.play());
+	        _this8.playWaitingForReady_ = false;
+	        callback(_this8.play());
 	      });
 
 	      // If the player/tech is ready and we have a source, we can attempt playback.
 	    } else if (!this.changingSrc_ && (this.src() || this.currentSrc())) {
-	      return this.techGet_('play');
+	      callback(this.techGet_('play'));
+	      return;
 
 	      // If the tech is ready, but we do not have a source, we'll need to wait
 	      // for both the `ready` and a `loadstart` when the source is finally
@@ -22763,8 +23057,8 @@
 	    } else {
 
 	      this.playOnLoadstart_ = function () {
-	        _this6.playOnLoadstart_ = null;
-	        silencePromise(_this6.play());
+	        _this8.playOnLoadstart_ = null;
+	        callback(_this8.play());
 	      };
 
 	      this.one('loadstart', this.playOnLoadstart_);
@@ -23374,7 +23668,7 @@
 
 
 	  Player.prototype.selectSource = function selectSource(sources) {
-	    var _this7 = this;
+	    var _this9 = this;
 
 	    // Get only the techs specified in `techOrder` that exist and are supported by the
 	    // current platform
@@ -23423,7 +23717,7 @@
 	      var techName = _ref2[0],
 	          tech = _ref2[1];
 
-	      if (tech.canPlaySource(source, _this7.options_[techName.toLowerCase()])) {
+	      if (tech.canPlaySource(source, _this9.options_[techName.toLowerCase()])) {
 	        return { source: source, tech: techName };
 	      }
 	    };
@@ -23459,7 +23753,7 @@
 
 
 	  Player.prototype.src = function src(source) {
-	    var _this8 = this;
+	    var _this10 = this;
 
 	    // getter usage
 	    if (typeof source === 'undefined') {
@@ -23487,35 +23781,35 @@
 
 	    // middlewareSource is the source after it has been changed by middleware
 	    setSource(this, sources[0], function (middlewareSource, mws) {
-	      _this8.middleware_ = mws;
+	      _this10.middleware_ = mws;
 
 	      // since sourceSet is async we have to update the cache again after we select a source since
 	      // the source that is selected could be out of order from the cache update above this callback.
-	      _this8.cache_.sources = sources;
-	      _this8.updateSourceCaches_(middlewareSource);
+	      _this10.cache_.sources = sources;
+	      _this10.updateSourceCaches_(middlewareSource);
 
-	      var err = _this8.src_(middlewareSource);
+	      var err = _this10.src_(middlewareSource);
 
 	      if (err) {
 	        if (sources.length > 1) {
-	          return _this8.src(sources.slice(1));
+	          return _this10.src(sources.slice(1));
 	        }
 
-	        _this8.changingSrc_ = false;
+	        _this10.changingSrc_ = false;
 
 	        // We need to wrap this in a timeout to give folks a chance to add error event handlers
-	        _this8.setTimeout(function () {
+	        _this10.setTimeout(function () {
 	          this.error({ code: 4, message: this.localize(this.options_.notSupportedMessage) });
 	        }, 0);
 
 	        // we could not find an appropriate tech, but let's still notify the delegate that this is it
 	        // this needs a better comment about why this is needed
-	        _this8.triggerReady();
+	        _this10.triggerReady();
 
 	        return;
 	      }
 
-	      setTech(mws, _this8.tech_);
+	      setTech(mws, _this10.tech_);
 	    });
 	  };
 
@@ -23535,7 +23829,7 @@
 
 
 	  Player.prototype.src_ = function src_(source) {
-	    var _this9 = this;
+	    var _this11 = this;
 
 	    var sourceTech = this.selectSource([source]);
 
@@ -23548,7 +23842,7 @@
 	      // load this technology with the chosen source
 	      this.loadTech_(sourceTech.tech, sourceTech.source);
 	      this.tech_.ready(function () {
-	        _this9.changingSrc_ = false;
+	        _this11.changingSrc_ = false;
 	      });
 	      return false;
 	    }
@@ -23589,6 +23883,9 @@
 
 
 	  Player.prototype.reset = function reset() {
+	    if (this.tech_) {
+	      this.tech_.clearTracks('text');
+	    }
 	    this.loadTech_(this.options_.techOrder[0], null);
 	    this.techCall_('reset');
 	  };
@@ -23674,24 +23971,56 @@
 	  };
 
 	  /**
-	   * Get or set the autoplay attribute.
+	   * Get or set the autoplay option. When this is a boolean it will
+	   * modify the attribute on the tech. When this is a string the attribute on
+	   * the tech will be removed and `Player` will handle autoplay on loadstarts.
 	   *
-	   * @param {boolean} [value]
-	   *        - true means that we should autoplay
-	   *        - false means that we should not autoplay
+	   * @param {boolean|string} [value]
+	   *        - true: autoplay using the browser behavior
+	   *        - false: do not autoplay
+	   *        - 'play': call play() on every loadstart
+	   *        - 'muted': call muted() then play() on every loadstart
+	   *        - 'any': call play() on every loadstart. if that fails call muted() then play().
+	   *        - *: values other than those listed here will be set `autoplay` to true
 	   *
-	   * @return {string}
+	   * @return {boolean|string}
 	   *         The current value of autoplay when getting
 	   */
 
 
 	  Player.prototype.autoplay = function autoplay(value) {
-	    if (value !== undefined) {
-	      this.techCall_('setAutoplay', value);
-	      this.options_.autoplay = value;
-	      return;
+	    // getter usage
+	    if (value === undefined) {
+	      return this.options_.autoplay || false;
 	    }
-	    return this.techGet_('autoplay', value);
+
+	    var techAutoplay = void 0;
+
+	    // if the value is a valid string set it to that
+	    if (typeof value === 'string' && /(any|play|muted)/.test(value)) {
+	      this.options_.autoplay = value;
+	      this.manualAutoplay_(value);
+	      techAutoplay = false;
+
+	      // any falsy value sets autoplay to false in the browser,
+	      // lets do the same
+	    } else if (!value) {
+	      this.options_.autoplay = false;
+
+	      // any other value (ie truthy) sets autoplay to true
+	    } else {
+	      this.options_.autoplay = true;
+	    }
+
+	    techAutoplay = techAutoplay || this.options_.autoplay;
+
+	    // if we don't have a tech then we do not queue up
+	    // a setAutoplay call on tech ready. We do this because the
+	    // autoplay option will be passed in the constructor and we
+	    // do not need to set it twice
+	    if (this.tech_) {
+	      this.techCall_('setAutoplay', techAutoplay);
+	    }
 	  };
 
 	  /**
@@ -24426,7 +24755,7 @@
 
 
 	  Player.prototype.createModal = function createModal(content, options) {
-	    var _this10 = this;
+	    var _this12 = this;
 
 	    options = options || {};
 	    options.content = content || '';
@@ -24435,7 +24764,7 @@
 
 	    this.addChild(modal);
 	    modal.on('dispose', function () {
-	      _this10.removeChild(modal);
+	      _this12.removeChild(modal);
 	    });
 
 	    modal.open();
@@ -25856,6 +26185,20 @@
 	videojs.registerPlugin = Plugin.registerPlugin;
 
 	/**
+	 * Deregister a Video.js plugin.
+	 *
+	 * @borrows plugin:deregisterPlugin as videojs.deregisterPlugin
+	 * @method deregisterPlugin
+	 *
+	 * @param  {string} name
+	 *         The name of the plugin to be deregistered. Must be a string and
+	 *         must match an existing plugin or a method on the `Player`
+	 *         prototype.
+	 *
+	 */
+	videojs.deregisterPlugin = Plugin.deregisterPlugin;
+
+	/**
 	 * Deprecated method to register a plugin with Video.js
 	 *
 	 * @deprecated
@@ -26270,7 +26613,7 @@
 	var window = __webpack_require__(7)
 	var isFunction = __webpack_require__(12)
 	var parseHeaders = __webpack_require__(13)
-	var xtend = __webpack_require__(16)
+	var xtend = __webpack_require__(17)
 
 	module.exports = createXHR
 	createXHR.XMLHttpRequest = window.XMLHttpRequest || noop
@@ -26590,56 +26933,115 @@
 /* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var isFunction = __webpack_require__(12)
+	'use strict';
 
-	module.exports = forEach
+	var isCallable = __webpack_require__(16);
 
-	var toString = Object.prototype.toString
-	var hasOwnProperty = Object.prototype.hasOwnProperty
+	var toStr = Object.prototype.toString;
+	var hasOwnProperty = Object.prototype.hasOwnProperty;
 
-	function forEach(list, iterator, context) {
-	    if (!isFunction(iterator)) {
-	        throw new TypeError('iterator must be a function')
-	    }
-
-	    if (arguments.length < 3) {
-	        context = this
-	    }
-	    
-	    if (toString.call(list) === '[object Array]')
-	        forEachArray(list, iterator, context)
-	    else if (typeof list === 'string')
-	        forEachString(list, iterator, context)
-	    else
-	        forEachObject(list, iterator, context)
-	}
-
-	function forEachArray(array, iterator, context) {
+	var forEachArray = function forEachArray(array, iterator, receiver) {
 	    for (var i = 0, len = array.length; i < len; i++) {
 	        if (hasOwnProperty.call(array, i)) {
-	            iterator.call(context, array[i], i, array)
+	            if (receiver == null) {
+	                iterator(array[i], i, array);
+	            } else {
+	                iterator.call(receiver, array[i], i, array);
+	            }
 	        }
 	    }
-	}
+	};
 
-	function forEachString(string, iterator, context) {
+	var forEachString = function forEachString(string, iterator, receiver) {
 	    for (var i = 0, len = string.length; i < len; i++) {
 	        // no such thing as a sparse string.
-	        iterator.call(context, string.charAt(i), i, string)
-	    }
-	}
-
-	function forEachObject(object, iterator, context) {
-	    for (var k in object) {
-	        if (hasOwnProperty.call(object, k)) {
-	            iterator.call(context, object[k], k, object)
+	        if (receiver == null) {
+	            iterator(string.charAt(i), i, string);
+	        } else {
+	            iterator.call(receiver, string.charAt(i), i, string);
 	        }
 	    }
-	}
+	};
+
+	var forEachObject = function forEachObject(object, iterator, receiver) {
+	    for (var k in object) {
+	        if (hasOwnProperty.call(object, k)) {
+	            if (receiver == null) {
+	                iterator(object[k], k, object);
+	            } else {
+	                iterator.call(receiver, object[k], k, object);
+	            }
+	        }
+	    }
+	};
+
+	var forEach = function forEach(list, iterator, thisArg) {
+	    if (!isCallable(iterator)) {
+	        throw new TypeError('iterator must be a function');
+	    }
+
+	    var receiver;
+	    if (arguments.length >= 3) {
+	        receiver = thisArg;
+	    }
+
+	    if (toStr.call(list) === '[object Array]') {
+	        forEachArray(list, iterator, receiver);
+	    } else if (typeof list === 'string') {
+	        forEachString(list, iterator, receiver);
+	    } else {
+	        forEachObject(list, iterator, receiver);
+	    }
+	};
+
+	module.exports = forEach;
 
 
 /***/ }),
 /* 16 */
+/***/ (function(module, exports) {
+
+	'use strict';
+
+	var fnToStr = Function.prototype.toString;
+
+	var constructorRegex = /^\s*class\b/;
+	var isES6ClassFn = function isES6ClassFunction(value) {
+		try {
+			var fnStr = fnToStr.call(value);
+			return constructorRegex.test(fnStr);
+		} catch (e) {
+			return false; // not a function
+		}
+	};
+
+	var tryFunctionObject = function tryFunctionToStr(value) {
+		try {
+			if (isES6ClassFn(value)) { return false; }
+			fnToStr.call(value);
+			return true;
+		} catch (e) {
+			return false;
+		}
+	};
+	var toStr = Object.prototype.toString;
+	var fnClass = '[object Function]';
+	var genClass = '[object GeneratorFunction]';
+	var hasToStringTag = typeof Symbol === 'function' && typeof Symbol.toStringTag === 'symbol';
+
+	module.exports = function isCallable(value) {
+		if (!value) { return false; }
+		if (typeof value !== 'function' && typeof value !== 'object') { return false; }
+		if (typeof value === 'function' && !value.prototype) { return true; }
+		if (hasToStringTag) { return tryFunctionObject(value); }
+		if (isES6ClassFn(value)) { return false; }
+		var strClass = toStr.call(value);
+		return strClass === fnClass || strClass === genClass;
+	};
+
+
+/***/ }),
+/* 17 */
 /***/ (function(module, exports) {
 
 	module.exports = extend
@@ -26664,7 +27066,7 @@
 
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/**
@@ -26691,9 +27093,9 @@
 	var window = __webpack_require__(7);
 
 	var vttjs = module.exports = {
-	  WebVTT: __webpack_require__(18),
-	  VTTCue: __webpack_require__(19),
-	  VTTRegion: __webpack_require__(20)
+	  WebVTT: __webpack_require__(19),
+	  VTTCue: __webpack_require__(20),
+	  VTTRegion: __webpack_require__(21)
 	};
 
 	window.vttjs = vttjs;
@@ -26720,7 +27122,7 @@
 
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports) {
 
 	/**
@@ -28055,7 +28457,7 @@
 
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports) {
 
 	/**
@@ -28366,7 +28768,7 @@
 
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports) {
 
 	/**
@@ -28506,20 +28908,20 @@
 
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var _lineStream = __webpack_require__(22);
+	var _lineStream = __webpack_require__(23);
 
 	var _lineStream2 = _interopRequireDefault(_lineStream);
 
-	var _parseStream = __webpack_require__(24);
+	var _parseStream = __webpack_require__(25);
 
 	var _parseStream2 = _interopRequireDefault(_parseStream);
 
-	var _parser = __webpack_require__(25);
+	var _parser = __webpack_require__(26);
 
 	var _parser2 = _interopRequireDefault(_parser);
 
@@ -28540,7 +28942,7 @@
 	    */
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28551,7 +28953,7 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _stream = __webpack_require__(23);
+	var _stream = __webpack_require__(24);
 
 	var _stream2 = _interopRequireDefault(_stream);
 
@@ -28613,7 +29015,7 @@
 	exports['default'] = LineStream;
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -28750,7 +29152,7 @@
 	exports['default'] = Stream;
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28763,7 +29165,7 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _stream = __webpack_require__(23);
+	var _stream = __webpack_require__(24);
 
 	var _stream2 = _interopRequireDefault(_stream);
 
@@ -29207,7 +29609,7 @@
 	exports['default'] = ParseStream;
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29220,15 +29622,15 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _stream = __webpack_require__(23);
+	var _stream = __webpack_require__(24);
 
 	var _stream2 = _interopRequireDefault(_stream);
 
-	var _lineStream = __webpack_require__(22);
+	var _lineStream = __webpack_require__(23);
 
 	var _lineStream2 = _interopRequireDefault(_lineStream);
 
-	var _parseStream = __webpack_require__(24);
+	var _parseStream = __webpack_require__(25);
 
 	var _parseStream2 = _interopRequireDefault(_parseStream);
 
@@ -29602,7 +30004,7 @@
 	exports['default'] = Parser;
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/**
@@ -30191,7 +30593,7 @@
 	};
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/**
@@ -30282,7 +30684,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/**
@@ -30303,9 +30705,9 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _decrypter = __webpack_require__(29);
+	var _decrypter = __webpack_require__(30);
 
-	var _asyncStream = __webpack_require__(31);
+	var _asyncStream = __webpack_require__(32);
 
 	var _asyncStream2 = _interopRequireDefault(_asyncStream);
 
@@ -30317,7 +30719,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/**
@@ -30339,15 +30741,15 @@
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-	var _aes = __webpack_require__(30);
+	var _aes = __webpack_require__(31);
 
 	var _aes2 = _interopRequireDefault(_aes);
 
-	var _asyncStream = __webpack_require__(31);
+	var _asyncStream = __webpack_require__(32);
 
 	var _asyncStream2 = _interopRequireDefault(_asyncStream);
 
-	var _pkcs7 = __webpack_require__(33);
+	var _pkcs7 = __webpack_require__(34);
 
 	/**
 	 * Convert network-order (big-endian) bytes into their little-endian
@@ -30505,7 +30907,7 @@
 	};
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports) {
 
 	/**
@@ -30755,7 +31157,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/**
@@ -30777,7 +31179,7 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var _stream = __webpack_require__(32);
+	var _stream = __webpack_require__(33);
 
 	var _stream2 = _interopRequireDefault(_stream);
 
@@ -30840,7 +31242,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports) {
 
 	/**
@@ -30975,7 +31377,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/*
@@ -30988,12 +31390,12 @@
 
 	'use strict';
 
-	exports.pad = __webpack_require__(34);
-	exports.unpad = __webpack_require__(35);
+	exports.pad = __webpack_require__(35);
+	exports.unpad = __webpack_require__(36);
 
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports) {
 
 	/*
@@ -31083,7 +31485,7 @@
 
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports) {
 
 	/*
@@ -31108,7 +31510,7 @@
 
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports) {
 
 	/**
@@ -31229,7 +31631,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/**
@@ -31247,11 +31649,11 @@
 
 	var _globalWindow2 = _interopRequireDefault(_globalWindow);
 
-	var _flashMediaSource = __webpack_require__(38);
+	var _flashMediaSource = __webpack_require__(39);
 
 	var _flashMediaSource2 = _interopRequireDefault(_flashMediaSource);
 
-	var _htmlMediaSource = __webpack_require__(62);
+	var _htmlMediaSource = __webpack_require__(63);
 
 	var _htmlMediaSource2 = _interopRequireDefault(_htmlMediaSource);
 
@@ -31390,7 +31792,7 @@
 	_videoJs2['default'].URL = URL;
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/**
@@ -31420,15 +31822,15 @@
 
 	var _videoJs2 = _interopRequireDefault(_videoJs);
 
-	var _flashSourceBuffer = __webpack_require__(39);
+	var _flashSourceBuffer = __webpack_require__(40);
 
 	var _flashSourceBuffer2 = _interopRequireDefault(_flashSourceBuffer);
 
-	var _flashConstants = __webpack_require__(60);
+	var _flashConstants = __webpack_require__(61);
 
 	var _flashConstants2 = _interopRequireDefault(_flashConstants);
 
-	var _codecUtils = __webpack_require__(61);
+	var _codecUtils = __webpack_require__(62);
 
 	/**
 	 * A flash implmentation of HTML MediaSources and a polyfill
@@ -31600,7 +32002,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/**
@@ -31630,29 +32032,29 @@
 
 	var _videoJs2 = _interopRequireDefault(_videoJs);
 
-	var _muxJsLibFlv = __webpack_require__(40);
+	var _muxJsLibFlv = __webpack_require__(41);
 
 	var _muxJsLibFlv2 = _interopRequireDefault(_muxJsLibFlv);
 
-	var _removeCuesFromTrack = __webpack_require__(55);
+	var _removeCuesFromTrack = __webpack_require__(56);
 
 	var _removeCuesFromTrack2 = _interopRequireDefault(_removeCuesFromTrack);
 
-	var _createTextTracksIfNecessary = __webpack_require__(56);
+	var _createTextTracksIfNecessary = __webpack_require__(57);
 
 	var _createTextTracksIfNecessary2 = _interopRequireDefault(_createTextTracksIfNecessary);
 
-	var _addTextTrackData = __webpack_require__(57);
+	var _addTextTrackData = __webpack_require__(58);
 
-	var _flashTransmuxerWorker = __webpack_require__(58);
+	var _flashTransmuxerWorker = __webpack_require__(59);
 
 	var _flashTransmuxerWorker2 = _interopRequireDefault(_flashTransmuxerWorker);
 
-	var _webwackify = __webpack_require__(59);
+	var _webwackify = __webpack_require__(60);
 
 	var _webwackify2 = _interopRequireDefault(_webwackify);
 
-	var _flashConstants = __webpack_require__(60);
+	var _flashConstants = __webpack_require__(61);
 
 	var _flashConstants2 = _interopRequireDefault(_flashConstants);
 
@@ -31660,7 +32062,7 @@
 	  var result = undefined;
 
 	  try {
-	    result = /*require.resolve*/(58);
+	    result = /*require.resolve*/(59);
 	  } catch (e) {
 	    // no result
 	  }
@@ -32236,18 +32638,18 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	module.exports = {
-	  tag: __webpack_require__(41),
-	  Transmuxer: __webpack_require__(42),
-	  getFlvHeader: __webpack_require__(54)
+	  tag: __webpack_require__(42),
+	  Transmuxer: __webpack_require__(43),
+	  getFlvHeader: __webpack_require__(55)
 	};
 
 
 /***/ }),
-/* 41 */
+/* 42 */
 /***/ (function(module, exports) {
 
 	/**
@@ -32625,18 +33027,18 @@
 
 
 /***/ }),
-/* 42 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var Stream = __webpack_require__(43);
-	var FlvTag = __webpack_require__(41);
-	var m2ts = __webpack_require__(44);
-	var AdtsStream = __webpack_require__(49);
-	var H264Stream = __webpack_require__(50).H264Stream;
-	var CoalesceStream = __webpack_require__(52);
-	var TagList = __webpack_require__(53);
+	var Stream = __webpack_require__(44);
+	var FlvTag = __webpack_require__(42);
+	var m2ts = __webpack_require__(45);
+	var AdtsStream = __webpack_require__(50);
+	var H264Stream = __webpack_require__(51).H264Stream;
+	var CoalesceStream = __webpack_require__(53);
+	var TagList = __webpack_require__(54);
 
 	var
 	  Transmuxer,
@@ -33078,7 +33480,7 @@
 
 
 /***/ }),
-/* 43 */
+/* 44 */
 /***/ (function(module, exports) {
 
 	/**
@@ -33201,7 +33603,7 @@
 
 
 /***/ }),
-/* 44 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/**
@@ -33215,12 +33617,12 @@
 	 * Media Source Extensions.
 	 */
 	'use strict';
-	var Stream = __webpack_require__(43),
-	  CaptionStream = __webpack_require__(45),
-	  StreamTypes = __webpack_require__(46),
-	  TimestampRolloverStream = __webpack_require__(47).TimestampRolloverStream;
+	var Stream = __webpack_require__(44),
+	  CaptionStream = __webpack_require__(46),
+	  StreamTypes = __webpack_require__(47),
+	  TimestampRolloverStream = __webpack_require__(48).TimestampRolloverStream;
 
-	var m2tsStreamTypes = __webpack_require__(46);
+	var m2tsStreamTypes = __webpack_require__(47);
 
 	// object types
 	var TransportPacketStream, TransportParseStream, ElementaryStream;
@@ -33700,7 +34102,7 @@
 	  TimestampRolloverStream: TimestampRolloverStream,
 	  CaptionStream: CaptionStream.CaptionStream,
 	  Cea608Stream: CaptionStream.Cea608Stream,
-	  MetadataStream: __webpack_require__(48)
+	  MetadataStream: __webpack_require__(49)
 	};
 
 	for (var type in StreamTypes) {
@@ -33713,7 +34115,7 @@
 
 
 /***/ }),
-/* 45 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/**
@@ -33741,7 +34143,7 @@
 	// payload type 0x04.
 	var USER_DATA_REGISTERED_ITU_T_T35 = 4,
 	    RBSP_TRAILING_BITS = 128,
-	    Stream = __webpack_require__(43);
+	    Stream = __webpack_require__(44);
 
 	/**
 	  * Parse a supplemental enhancement information (SEI) NAL unit.
@@ -34575,7 +34977,7 @@
 
 
 /***/ }),
-/* 46 */
+/* 47 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -34588,7 +34990,7 @@
 
 
 /***/ }),
-/* 47 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/**
@@ -34604,7 +35006,7 @@
 
 	'use strict';
 
-	var Stream = __webpack_require__(43);
+	var Stream = __webpack_require__(44);
 
 	var MAX_TS = 8589934592;
 
@@ -34678,7 +35080,7 @@
 
 
 /***/ }),
-/* 48 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/**
@@ -34688,8 +35090,8 @@
 	 */
 	'use strict';
 	var
-	  Stream = __webpack_require__(43),
-	  StreamTypes = __webpack_require__(46),
+	  Stream = __webpack_require__(44),
+	  StreamTypes = __webpack_require__(47),
 	  // return a percent-encoded representation of the specified byte range
 	  // @see http://en.wikipedia.org/wiki/Percent-encoding
 	  percentEncode = function(bytes, start, end) {
@@ -34932,12 +35334,12 @@
 
 
 /***/ }),
-/* 49 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var Stream = __webpack_require__(43);
+	var Stream = __webpack_require__(44);
 
 	var AdtsStream;
 
@@ -35070,13 +35472,13 @@
 
 
 /***/ }),
-/* 50 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var Stream = __webpack_require__(43);
-	var ExpGolomb = __webpack_require__(51);
+	var Stream = __webpack_require__(44);
+	var ExpGolomb = __webpack_require__(52);
 
 	var H264Stream, NalByteStream;
 	var PROFILES_WITH_OPTIONAL_SPS_DATA;
@@ -35494,7 +35896,7 @@
 
 
 /***/ }),
-/* 51 */
+/* 52 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -35647,12 +36049,12 @@
 
 
 /***/ }),
-/* 52 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var Stream = __webpack_require__(43);
+	var Stream = __webpack_require__(44);
 
 	/**
 	 * The final stage of the transmuxer that emits the flv tags
@@ -35798,7 +36200,7 @@
 
 
 /***/ }),
-/* 53 */
+/* 54 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -35829,12 +36231,12 @@
 
 
 /***/ }),
-/* 54 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var FlvTag = __webpack_require__(41);
+	var FlvTag = __webpack_require__(42);
 
 	// For information on the FLV format, see
 	// http://download.macromedia.com/f4v/video_file_format_spec_v10_1.pdf.
@@ -35895,7 +36297,7 @@
 
 
 /***/ }),
-/* 55 */
+/* 56 */
 /***/ (function(module, exports) {
 
 	/**
@@ -35943,7 +36345,7 @@
 	module.exports = exports["default"];
 
 /***/ }),
-/* 56 */
+/* 57 */
 /***/ (function(module, exports) {
 
 	/**
@@ -36008,7 +36410,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 57 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/**
@@ -36163,7 +36565,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 58 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/**
@@ -36185,7 +36587,7 @@
 
 	var _globalWindow2 = _interopRequireDefault(_globalWindow);
 
-	var _muxJsLibFlv = __webpack_require__(40);
+	var _muxJsLibFlv = __webpack_require__(41);
 
 	var _muxJsLibFlv2 = _interopRequireDefault(_muxJsLibFlv);
 
@@ -36317,7 +36719,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 59 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// By default assume browserify was used to bundle app. These arguments are passed to
@@ -36533,7 +36935,7 @@
 
 
 /***/ }),
-/* 60 */
+/* 61 */
 /***/ (function(module, exports) {
 
 	/**
@@ -36564,7 +36966,7 @@
 	module.exports = exports["default"];
 
 /***/ }),
-/* 61 */
+/* 62 */
 /***/ (function(module, exports) {
 
 	/**
@@ -36656,7 +37058,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 62 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/**
@@ -36690,13 +37092,13 @@
 
 	var _videoJs2 = _interopRequireDefault(_videoJs);
 
-	var _virtualSourceBuffer = __webpack_require__(63);
+	var _virtualSourceBuffer = __webpack_require__(64);
 
 	var _virtualSourceBuffer2 = _interopRequireDefault(_virtualSourceBuffer);
 
-	var _addTextTrackData = __webpack_require__(57);
+	var _addTextTrackData = __webpack_require__(58);
 
-	var _codecUtils = __webpack_require__(61);
+	var _codecUtils = __webpack_require__(62);
 
 	/**
 	 * Our MediaSource implementation in HTML, mimics native
@@ -37037,7 +37439,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 63 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/**
@@ -37063,31 +37465,31 @@
 
 	var _videoJs2 = _interopRequireDefault(_videoJs);
 
-	var _createTextTracksIfNecessary = __webpack_require__(56);
+	var _createTextTracksIfNecessary = __webpack_require__(57);
 
 	var _createTextTracksIfNecessary2 = _interopRequireDefault(_createTextTracksIfNecessary);
 
-	var _removeCuesFromTrack = __webpack_require__(55);
+	var _removeCuesFromTrack = __webpack_require__(56);
 
 	var _removeCuesFromTrack2 = _interopRequireDefault(_removeCuesFromTrack);
 
-	var _addTextTrackData = __webpack_require__(57);
+	var _addTextTrackData = __webpack_require__(58);
 
-	var _webwackify = __webpack_require__(59);
+	var _webwackify = __webpack_require__(60);
 
 	var _webwackify2 = _interopRequireDefault(_webwackify);
 
-	var _transmuxerWorker = __webpack_require__(64);
+	var _transmuxerWorker = __webpack_require__(65);
 
 	var _transmuxerWorker2 = _interopRequireDefault(_transmuxerWorker);
 
-	var _codecUtils = __webpack_require__(61);
+	var _codecUtils = __webpack_require__(62);
 
 	var resolveTransmuxWorker = function resolveTransmuxWorker() {
 	  var result = undefined;
 
 	  try {
-	    result = /*require.resolve*/(64);
+	    result = /*require.resolve*/(65);
 	  } catch (e) {
 	    // no result
 	  }
@@ -37869,7 +38271,7 @@
 	exports['default'] = VirtualSourceBuffer;
 
 /***/ }),
-/* 64 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/**
@@ -37902,7 +38304,7 @@
 
 	var _globalWindow2 = _interopRequireDefault(_globalWindow);
 
-	var _muxJsLibMp4 = __webpack_require__(65);
+	var _muxJsLibMp4 = __webpack_require__(66);
 
 	var _muxJsLibMp42 = _interopRequireDefault(_muxJsLibMp4);
 
@@ -38094,19 +38496,19 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 65 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	module.exports = {
-	  generator: __webpack_require__(66),
-	  Transmuxer: __webpack_require__(67).Transmuxer,
-	  AudioSegmentStream: __webpack_require__(67).AudioSegmentStream,
-	  VideoSegmentStream: __webpack_require__(67).VideoSegmentStream
+	  generator: __webpack_require__(67),
+	  Transmuxer: __webpack_require__(68).Transmuxer,
+	  AudioSegmentStream: __webpack_require__(68).AudioSegmentStream,
+	  VideoSegmentStream: __webpack_require__(68).VideoSegmentStream
 	};
 
 
 /***/ }),
-/* 66 */
+/* 67 */
 /***/ (function(module, exports) {
 
 	/**
@@ -38882,7 +39284,7 @@
 
 
 /***/ }),
-/* 67 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/**
@@ -38897,14 +39299,14 @@
 	 */
 	'use strict';
 
-	var Stream = __webpack_require__(43);
-	var mp4 = __webpack_require__(66);
-	var m2ts = __webpack_require__(44);
-	var AdtsStream = __webpack_require__(49);
-	var H264Stream = __webpack_require__(50).H264Stream;
-	var AacStream = __webpack_require__(68);
-	var coneOfSilence = __webpack_require__(69);
-	var clock = __webpack_require__(70);
+	var Stream = __webpack_require__(44);
+	var mp4 = __webpack_require__(67);
+	var m2ts = __webpack_require__(45);
+	var AdtsStream = __webpack_require__(50);
+	var H264Stream = __webpack_require__(51).H264Stream;
+	var AacStream = __webpack_require__(69);
+	var coneOfSilence = __webpack_require__(70);
+	var clock = __webpack_require__(71);
 
 	// constants
 	var AUDIO_PROPERTIES = [
@@ -40342,7 +40744,7 @@
 
 
 /***/ }),
-/* 68 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/**
@@ -40356,7 +40758,7 @@
 	 * Media Source Extensions.
 	 */
 	'use strict';
-	var Stream = __webpack_require__(43);
+	var Stream = __webpack_require__(44);
 
 	// Constants
 	var AacStream;
@@ -40491,7 +40893,7 @@
 
 
 /***/ }),
-/* 69 */
+/* 70 */
 /***/ (function(module, exports) {
 
 	var highPrefix = [33, 16, 5, 32, 164, 27];
@@ -40532,7 +40934,7 @@
 
 
 /***/ }),
-/* 70 */
+/* 71 */
 /***/ (function(module, exports) {
 
 	var
@@ -40579,7 +40981,7 @@
 
 
 /***/ }),
-/* 71 */
+/* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/**
@@ -40605,17 +41007,17 @@
 
 	var _playlistLoader2 = _interopRequireDefault(_playlistLoader);
 
-	var _playlistJs = __webpack_require__(26);
+	var _playlistJs = __webpack_require__(27);
 
-	var _segmentLoader = __webpack_require__(72);
+	var _segmentLoader = __webpack_require__(73);
 
 	var _segmentLoader2 = _interopRequireDefault(_segmentLoader);
 
-	var _vttSegmentLoader = __webpack_require__(79);
+	var _vttSegmentLoader = __webpack_require__(80);
 
 	var _vttSegmentLoader2 = _interopRequireDefault(_vttSegmentLoader);
 
-	var _ranges = __webpack_require__(76);
+	var _ranges = __webpack_require__(77);
 
 	var _ranges2 = _interopRequireDefault(_ranges);
 
@@ -40623,31 +41025,31 @@
 
 	var _videoJs2 = _interopRequireDefault(_videoJs);
 
-	var _adCueTags = __webpack_require__(80);
+	var _adCueTags = __webpack_require__(81);
 
 	var _adCueTags2 = _interopRequireDefault(_adCueTags);
 
-	var _syncController = __webpack_require__(81);
+	var _syncController = __webpack_require__(82);
 
 	var _syncController2 = _interopRequireDefault(_syncController);
 
-	var _videojsContribMediaSourcesEs5CodecUtils = __webpack_require__(61);
+	var _videojsContribMediaSourcesEs5CodecUtils = __webpack_require__(62);
 
-	var _webwackify = __webpack_require__(59);
+	var _webwackify = __webpack_require__(60);
 
 	var _webwackify2 = _interopRequireDefault(_webwackify);
 
-	var _decrypterWorker = __webpack_require__(86);
+	var _decrypterWorker = __webpack_require__(87);
 
 	var _decrypterWorker2 = _interopRequireDefault(_decrypterWorker);
 
-	var _config = __webpack_require__(74);
+	var _config = __webpack_require__(75);
 
 	var _config2 = _interopRequireDefault(_config);
 
-	var _utilCodecsJs = __webpack_require__(78);
+	var _utilCodecsJs = __webpack_require__(79);
 
-	var _mediaGroups = __webpack_require__(87);
+	var _mediaGroups = __webpack_require__(88);
 
 	var ABORT_EARLY_BLACKLIST_SECONDS = 60 * 2;
 
@@ -40672,7 +41074,7 @@
 	  var result = undefined;
 
 	  try {
-	    result = /*require.resolve*/(86);
+	    result = /*require.resolve*/(87);
 	  } catch (e) {
 	    // no result
 	  }
@@ -41945,7 +42347,7 @@
 	exports.MasterPlaylistController = MasterPlaylistController;
 
 /***/ }),
-/* 72 */
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/**
@@ -41967,7 +42369,7 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var _playlist = __webpack_require__(26);
+	var _playlist = __webpack_require__(27);
 
 	var _playlist2 = _interopRequireDefault(_playlist);
 
@@ -41975,11 +42377,11 @@
 
 	var _videoJs2 = _interopRequireDefault(_videoJs);
 
-	var _sourceUpdater = __webpack_require__(73);
+	var _sourceUpdater = __webpack_require__(74);
 
 	var _sourceUpdater2 = _interopRequireDefault(_sourceUpdater);
 
-	var _config = __webpack_require__(74);
+	var _config = __webpack_require__(75);
 
 	var _config2 = _interopRequireDefault(_config);
 
@@ -41987,17 +42389,17 @@
 
 	var _globalWindow2 = _interopRequireDefault(_globalWindow);
 
-	var _videojsContribMediaSourcesEs5RemoveCuesFromTrackJs = __webpack_require__(55);
+	var _videojsContribMediaSourcesEs5RemoveCuesFromTrackJs = __webpack_require__(56);
 
 	var _videojsContribMediaSourcesEs5RemoveCuesFromTrackJs2 = _interopRequireDefault(_videojsContribMediaSourcesEs5RemoveCuesFromTrackJs);
 
-	var _binUtils = __webpack_require__(36);
+	var _binUtils = __webpack_require__(37);
 
-	var _mediaSegmentRequest = __webpack_require__(75);
+	var _mediaSegmentRequest = __webpack_require__(76);
 
-	var _ranges = __webpack_require__(76);
+	var _ranges = __webpack_require__(77);
 
-	var _playlistSelectors = __webpack_require__(77);
+	var _playlistSelectors = __webpack_require__(78);
 
 	// in ms
 	var CHECK_BUFFER_DELAY = 500;
@@ -43353,7 +43755,7 @@
 	exports['default'] = SegmentLoader;
 
 /***/ }),
-/* 73 */
+/* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/**
@@ -43576,7 +43978,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 74 */
+/* 75 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -43599,7 +44001,7 @@
 	module.exports = exports["default"];
 
 /***/ }),
-/* 75 */
+/* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -43614,7 +44016,7 @@
 
 	var _videoJs2 = _interopRequireDefault(_videoJs);
 
-	var _binUtils = __webpack_require__(36);
+	var _binUtils = __webpack_require__(37);
 
 	var REQUEST_ERRORS = {
 	  FAILURE: 2,
@@ -44051,7 +44453,7 @@
 	exports.mediaSegmentRequest = mediaSegmentRequest;
 
 /***/ }),
-/* 76 */
+/* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/**
@@ -44435,7 +44837,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 77 */
+/* 78 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -44446,15 +44848,15 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _config = __webpack_require__(74);
+	var _config = __webpack_require__(75);
 
 	var _config2 = _interopRequireDefault(_config);
 
-	var _playlist = __webpack_require__(26);
+	var _playlist = __webpack_require__(27);
 
 	var _playlist2 = _interopRequireDefault(_playlist);
 
-	var _utilCodecsJs = __webpack_require__(78);
+	var _utilCodecsJs = __webpack_require__(79);
 
 	// Utilities
 
@@ -44869,7 +45271,7 @@
 	exports.lowestBitrateCompatibleVariantSelector = lowestBitrateCompatibleVariantSelector;
 
 /***/ }),
-/* 78 */
+/* 79 */
 /***/ (function(module, exports) {
 
 	
@@ -44915,7 +45317,7 @@
 	exports.parseCodecs = parseCodecs;
 
 /***/ }),
-/* 79 */
+/* 80 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/**
@@ -44937,7 +45339,7 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var _segmentLoader = __webpack_require__(72);
+	var _segmentLoader = __webpack_require__(73);
 
 	var _segmentLoader2 = _interopRequireDefault(_segmentLoader);
 
@@ -44949,11 +45351,11 @@
 
 	var _globalWindow2 = _interopRequireDefault(_globalWindow);
 
-	var _videojsContribMediaSourcesEs5RemoveCuesFromTrackJs = __webpack_require__(55);
+	var _videojsContribMediaSourcesEs5RemoveCuesFromTrackJs = __webpack_require__(56);
 
 	var _videojsContribMediaSourcesEs5RemoveCuesFromTrackJs2 = _interopRequireDefault(_videojsContribMediaSourcesEs5RemoveCuesFromTrackJs);
 
-	var _binUtils = __webpack_require__(36);
+	var _binUtils = __webpack_require__(37);
 
 	var VTT_LINE_TERMINATORS = new Uint8Array('\n\n'.split('').map(function (char) {
 	  return char.charCodeAt(0);
@@ -45381,7 +45783,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 80 */
+/* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/**
@@ -45498,7 +45900,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 81 */
+/* 82 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/**
@@ -45521,13 +45923,13 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var _muxJsLibMp4Probe = __webpack_require__(82);
+	var _muxJsLibMp4Probe = __webpack_require__(83);
 
 	var _muxJsLibMp4Probe2 = _interopRequireDefault(_muxJsLibMp4Probe);
 
-	var _muxJsLibToolsTsInspectorJs = __webpack_require__(83);
+	var _muxJsLibToolsTsInspectorJs = __webpack_require__(84);
 
-	var _playlist = __webpack_require__(26);
+	var _playlist = __webpack_require__(27);
 
 	var _videoJs = __webpack_require__(8);
 
@@ -46108,7 +46510,7 @@
 	exports['default'] = SyncController;
 
 /***/ }),
-/* 82 */
+/* 83 */
 /***/ (function(module, exports) {
 
 	/**
@@ -46302,7 +46704,7 @@
 
 
 /***/ }),
-/* 83 */
+/* 84 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/**
@@ -46315,11 +46717,11 @@
 	 */
 	'use strict';
 
-	var StreamTypes = __webpack_require__(46);
-	var handleRollover = __webpack_require__(47).handleRollover;
+	var StreamTypes = __webpack_require__(47);
+	var handleRollover = __webpack_require__(48).handleRollover;
 	var probe = {};
-	probe.ts = __webpack_require__(84);
-	probe.aac = __webpack_require__(85);
+	probe.ts = __webpack_require__(85);
+	probe.aac = __webpack_require__(86);
 
 
 	var
@@ -46820,7 +47222,7 @@
 
 
 /***/ }),
-/* 84 */
+/* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/**
@@ -46833,7 +47235,7 @@
 	 */
 	'use strict';
 
-	var StreamTypes = __webpack_require__(46);
+	var StreamTypes = __webpack_require__(47);
 
 	var parsePid = function(packet) {
 	  var pid = packet[1] & 0x1f;
@@ -47113,7 +47515,7 @@
 
 
 /***/ }),
-/* 85 */
+/* 86 */
 /***/ (function(module, exports) {
 
 	/**
@@ -47280,7 +47682,7 @@
 
 
 /***/ }),
-/* 86 */
+/* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -47295,9 +47697,9 @@
 
 	var _globalWindow2 = _interopRequireDefault(_globalWindow);
 
-	var _aesDecrypter = __webpack_require__(28);
+	var _aesDecrypter = __webpack_require__(29);
 
-	var _binUtils = __webpack_require__(36);
+	var _binUtils = __webpack_require__(37);
 
 	/**
 	 * Our web worker interface so that things can talk to aes-decrypter
@@ -47332,7 +47734,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 87 */
+/* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48091,7 +48493,7 @@
 	exports.createMediaTypes = createMediaTypes;
 
 /***/ }),
-/* 88 */
+/* 89 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48102,7 +48504,7 @@
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-	var _playlistJs = __webpack_require__(26);
+	var _playlistJs = __webpack_require__(27);
 
 	/**
 	 * Returns a function that acts as the Enable/disable playlist function.
@@ -48203,7 +48605,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 89 */
+/* 90 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/**
@@ -48232,7 +48634,7 @@
 
 	var _globalWindow2 = _interopRequireDefault(_globalWindow);
 
-	var _ranges = __webpack_require__(76);
+	var _ranges = __webpack_require__(77);
 
 	var _ranges2 = _interopRequireDefault(_ranges);
 
@@ -48658,7 +49060,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 90 */
+/* 91 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';

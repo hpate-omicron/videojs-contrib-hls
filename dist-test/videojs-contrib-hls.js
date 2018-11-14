@@ -9131,8 +9131,8 @@ module.exports = function unpad(padded) {
 (function(root) { 
 /* jshint ignore:end */
 
-  var URL_REGEX = /^((?:[a-zA-Z0-9+\-.]+:)?)(\/\/[^\/\;?#]*)?(.*?)??(;.*?)?(\?.*?)?(#.*?)?$/;
-  var FIRST_SEGMENT_REGEX = /^([^\/;?#]*)(.*)$/;
+  var URL_REGEX = /^((?:[a-zA-Z0-9+\-.]+:)?)(\/\/[^\/?#]*)?((?:[^\/\?#]*\/)*.*?)??(;.*?)?(\?.*?)?(#.*?)?$/;
+  var FIRST_SEGMENT_REGEX = /^([^\/?#]*)(.*)$/;
   var SLASH_DOT_REGEX = /(?:\/|^)\.(?=\/)/g;
   var SLASH_DOT_DOT_REGEX = /(?:\/|^)\.\.\/(?!\.\.\/).*?(?=\/)/g;
 
@@ -10460,7 +10460,7 @@ var FlashSourceBuffer = (function (_videojs$EventTarget) {
 exports['default'] = FlashSourceBuffer;
 module.exports = exports['default'];
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./add-text-track-data":43,"./create-text-tracks-if-necessary":45,"./flash-constants":46,"./flash-transmuxer-worker":49,"./remove-cues-from-track":51,"global/window":8,"mux.js/lib/flv":22,"webwackify":58}],49:[function(require,module,exports){
+},{"./add-text-track-data":43,"./create-text-tracks-if-necessary":45,"./flash-constants":46,"./flash-transmuxer-worker":49,"./remove-cues-from-track":51,"global/window":8,"mux.js/lib/flv":22,"webwackify":56}],49:[function(require,module,exports){
 /**
  * @file flash-transmuxer-worker.js
  */
@@ -12243,102 +12243,96 @@ var VirtualSourceBuffer = (function (_videojs$EventTarget) {
 
 exports['default'] = VirtualSourceBuffer;
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./add-text-track-data":43,"./codec-utils":44,"./create-text-tracks-if-necessary":45,"./remove-cues-from-track":51,"./transmuxer-worker":52,"webwackify":58}],55:[function(require,module,exports){
+},{"./add-text-track-data":43,"./codec-utils":44,"./create-text-tracks-if-necessary":45,"./remove-cues-from-track":51,"./transmuxer-worker":52,"webwackify":56}],55:[function(require,module,exports){
 (function (global){
+/*! @name videojs-contrib-quality-levels @version 2.0.9 @license Apache-2.0 */
 'use strict';
 
-exports.__esModule = true;
+function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
-var _video = (typeof window !== "undefined" ? window['videojs'] : typeof global !== "undefined" ? global['videojs'] : null);
+var videojs = _interopDefault((typeof window !== "undefined" ? window['videojs'] : typeof global !== "undefined" ? global['videojs'] : null));
+var document = _interopDefault(require('global/document'));
 
-var _video2 = _interopRequireDefault(_video);
+function _inheritsLoose(subClass, superClass) {
+  subClass.prototype = Object.create(superClass.prototype);
+  subClass.prototype.constructor = subClass;
+  subClass.__proto__ = superClass;
+}
 
-var _qualityLevelList = require('./quality-level-list.js');
+function _assertThisInitialized(self) {
+  if (self === void 0) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
 
-var _qualityLevelList2 = _interopRequireDefault(_qualityLevelList);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-// vjs 5/6 support
-var registerPlugin = _video2['default'].registerPlugin || _video2['default'].plugin;
-
-/**
- * Initialization function for the qualityLevels plugin. Sets up the QualityLevelList and
- * event handlers.
- *
- * @param {Player} player Player object.
- * @param {Object} options Plugin options object.
- * @function initPlugin
- */
-var initPlugin = function initPlugin(player, options) {
-  var originalPluginFn = player.qualityLevels;
-
-  var qualityLevelList = new _qualityLevelList2['default']();
-
-  var disposeHandler = function disposeHandler() {
-    qualityLevelList.dispose();
-    player.qualityLevels = originalPluginFn;
-    player.off('dispose', disposeHandler);
-  };
-
-  player.on('dispose', disposeHandler);
-
-  player.qualityLevels = function () {
-    return qualityLevelList;
-  };
-  player.qualityLevels.VERSION = '2.0.4';
-
-  return qualityLevelList;
-};
+  return self;
+}
 
 /**
- * A video.js plugin.
+ * A single QualityLevel.
  *
- * In the plugin function, the value of `this` is a video.js `Player`
- * instance. You cannot rely on the player being in a "ready" state here,
- * depending on how the plugin is invoked. This may or may not be important
- * to you; if not, remove the wait for "ready"!
+ * interface QualityLevel {
+ *   readonly attribute DOMString id;
+ *            attribute DOMString label;
+ *   readonly attribute long width;
+ *   readonly attribute long height;
+ *   readonly attribute long bitrate;
+ *            attribute boolean enabled;
+ * };
  *
- * @param {Object} options Plugin options object
- * @function qualityLevels
+ * @class QualityLevel
  */
-var qualityLevels = function qualityLevels(options) {
-  return initPlugin(this, _video2['default'].mergeOptions({}, options));
+
+var QualityLevel =
+/**
+ * Creates a QualityLevel
+ *
+ * @param {Representation|Object} representation The representation of the quality level
+ * @param {string}   representation.id        Unique id of the QualityLevel
+ * @param {number=}  representation.width     Resolution width of the QualityLevel
+ * @param {number=}  representation.height    Resolution height of the QualityLevel
+ * @param {number}   representation.bandwidth Bitrate of the QualityLevel
+ * @param {Function} representation.enabled   Callback to enable/disable QualityLevel
+ */
+function QualityLevel(representation) {
+  var level = this; // eslint-disable-line
+
+  if (videojs.browser.IS_IE8) {
+    level = document.createElement('custom');
+
+    for (var prop in QualityLevel.prototype) {
+      if (prop !== 'constructor') {
+        level[prop] = QualityLevel.prototype[prop];
+      }
+    }
+  }
+
+  level.id = representation.id;
+  level.label = level.id;
+  level.width = representation.width;
+  level.height = representation.height;
+  level.bitrate = representation.bandwidth;
+  level.enabled_ = representation.enabled;
+  Object.defineProperty(level, 'enabled', {
+    /**
+     * Get whether the QualityLevel is enabled.
+     *
+     * @return {boolean} True if the QualityLevel is enabled.
+     */
+    get: function get() {
+      return level.enabled_();
+    },
+
+    /**
+     * Enable or disable the QualityLevel.
+     *
+     * @param {boolean} enable true to enable QualityLevel, false to disable.
+     */
+    set: function set(enable) {
+      level.enabled_(enable);
+    }
+  });
+  return level;
 };
-
-// Register the plugin with video.js.
-registerPlugin('qualityLevels', qualityLevels);
-
-// Include the version number.
-qualityLevels.VERSION = '2.0.4';
-
-exports['default'] = qualityLevels;
-}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./quality-level-list.js":56}],56:[function(require,module,exports){
-(function (global){
-'use strict';
-
-exports.__esModule = true;
-
-var _video = (typeof window !== "undefined" ? window['videojs'] : typeof global !== "undefined" ? global['videojs'] : null);
-
-var _video2 = _interopRequireDefault(_video);
-
-var _document = require('global/document');
-
-var _document2 = _interopRequireDefault(_document);
-
-var _qualityLevel = require('./quality-level.js');
-
-var _qualityLevel2 = _interopRequireDefault(_qualityLevel);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 /**
  * A list of QualityLevels.
@@ -12360,20 +12354,23 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
  * @extends videojs.EventTarget
  * @class QualityLevelList
  */
-var QualityLevelList = function (_videojs$EventTarget) {
-  _inherits(QualityLevelList, _videojs$EventTarget);
+
+var QualityLevelList =
+/*#__PURE__*/
+function (_videojs$EventTarget) {
+  _inheritsLoose(QualityLevelList, _videojs$EventTarget);
 
   function QualityLevelList() {
-    var _ret;
+    var _this;
 
-    _classCallCheck(this, QualityLevelList);
+    _this = _videojs$EventTarget.call(this) || this;
 
-    var _this = _possibleConstructorReturn(this, _videojs$EventTarget.call(this));
+    var list = _assertThisInitialized(_assertThisInitialized(_this)); // eslint-disable-line
 
-    var list = _this; // eslint-disable-line
 
-    if (_video2['default'].browser.IS_IE8) {
-      list = _document2['default'].createElement('custom');
+    if (videojs.browser.IS_IE8) {
+      list = document.createElement('custom');
+
       for (var prop in QualityLevelList.prototype) {
         if (prop !== 'constructor') {
           list[prop] = QualityLevelList.prototype[prop];
@@ -12383,34 +12380,32 @@ var QualityLevelList = function (_videojs$EventTarget) {
 
     list.levels_ = [];
     list.selectedIndex_ = -1;
-
     /**
      * Get the index of the currently selected QualityLevel.
      *
      * @returns {number} The index of the selected QualityLevel. -1 if none selected.
      * @readonly
      */
+
     Object.defineProperty(list, 'selectedIndex', {
       get: function get() {
         return list.selectedIndex_;
       }
     });
-
     /**
      * Get the length of the list of QualityLevels.
      *
      * @returns {number} The length of the list.
      * @readonly
      */
+
     Object.defineProperty(list, 'length', {
       get: function get() {
         return list.levels_.length;
       }
     });
-
-    return _ret = list, _possibleConstructorReturn(_this, _ret);
+    return list || _assertThisInitialized(_this);
   }
-
   /**
    * Adds a quality level to the list.
    *
@@ -12425,17 +12420,17 @@ var QualityLevelList = function (_videojs$EventTarget) {
    */
 
 
-  QualityLevelList.prototype.addQualityLevel = function addQualityLevel(representation) {
-    var qualityLevel = this.getQualityLevelById(representation.id);
+  var _proto = QualityLevelList.prototype;
 
-    // Do not add duplicate quality levels
+  _proto.addQualityLevel = function addQualityLevel(representation) {
+    var qualityLevel = this.getQualityLevelById(representation.id); // Do not add duplicate quality levels
+
     if (qualityLevel) {
       return qualityLevel;
     }
 
     var index = this.levels_.length;
-
-    qualityLevel = new _qualityLevel2['default'](representation);
+    qualityLevel = new QualityLevel(representation);
 
     if (!('' + index in this)) {
       Object.defineProperty(this, index, {
@@ -12446,15 +12441,12 @@ var QualityLevelList = function (_videojs$EventTarget) {
     }
 
     this.levels_.push(qualityLevel);
-
     this.trigger({
       qualityLevel: qualityLevel,
       type: 'addqualitylevel'
     });
-
     return qualityLevel;
   };
-
   /**
    * Removes a quality level from the list.
    *
@@ -12464,7 +12456,7 @@ var QualityLevelList = function (_videojs$EventTarget) {
    */
 
 
-  QualityLevelList.prototype.removeQualityLevel = function removeQualityLevel(qualityLevel) {
+  _proto.removeQualityLevel = function removeQualityLevel(qualityLevel) {
     var removed = null;
 
     for (var i = 0, l = this.length; i < l; i++) {
@@ -12476,6 +12468,7 @@ var QualityLevelList = function (_videojs$EventTarget) {
         } else if (this.selectedIndex_ > i) {
           this.selectedIndex_--;
         }
+
         break;
       }
     }
@@ -12489,17 +12482,16 @@ var QualityLevelList = function (_videojs$EventTarget) {
 
     return removed;
   };
-
   /**
    * Searches for a QualityLevel with the given id.
    *
    * @param {string} id The id of the QualityLevel to find.
-   * @returns {QualityLevel|null} The QualityLevel with id, or null if not found.
+   * @return {QualityLevel|null} The QualityLevel with id, or null if not found.
    * @method getQualityLevelById
    */
 
 
-  QualityLevelList.prototype.getQualityLevelById = function getQualityLevelById(id) {
+  _proto.getQualityLevelById = function getQualityLevelById(id) {
     for (var i = 0, l = this.length; i < l; i++) {
       var level = this[i];
 
@@ -12507,9 +12499,9 @@ var QualityLevelList = function (_videojs$EventTarget) {
         return level;
       }
     }
+
     return null;
   };
-
   /**
    * Resets the list of QualityLevels to empty
    *
@@ -12517,14 +12509,13 @@ var QualityLevelList = function (_videojs$EventTarget) {
    */
 
 
-  QualityLevelList.prototype.dispose = function dispose() {
+  _proto.dispose = function dispose() {
     this.selectedIndex_ = -1;
     this.levels_.length = 0;
   };
 
   return QualityLevelList;
-}(_video2['default'].EventTarget);
-
+}(videojs.EventTarget);
 /**
  * change - The selected QualityLevel has changed.
  * addqualitylevel - A QualityLevel has been added to the QualityLevelList.
@@ -12536,107 +12527,69 @@ QualityLevelList.prototype.allowedEvents_ = {
   change: 'change',
   addqualitylevel: 'addqualitylevel',
   removequalitylevel: 'removequalitylevel'
-};
+}; // emulate attribute EventHandler support to allow for feature detection
 
-// emulate attribute EventHandler support to allow for feature detection
 for (var event in QualityLevelList.prototype.allowedEvents_) {
   QualityLevelList.prototype['on' + event] = null;
 }
 
-exports['default'] = QualityLevelList;
-}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./quality-level.js":57,"global/document":7}],57:[function(require,module,exports){
-(function (global){
-'use strict';
+var version = "2.0.9";
 
-exports.__esModule = true;
-
-var _video = (typeof window !== "undefined" ? window['videojs'] : typeof global !== "undefined" ? global['videojs'] : null);
-
-var _video2 = _interopRequireDefault(_video);
-
-var _document = require('global/document');
-
-var _document2 = _interopRequireDefault(_document);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
+var registerPlugin = videojs.registerPlugin || videojs.plugin;
 /**
- * A single QualityLevel.
+ * Initialization function for the qualityLevels plugin. Sets up the QualityLevelList and
+ * event handlers.
  *
- * interface QualityLevel {
- *   readonly attribute DOMString id;
- *            attribute DOMString label;
- *   readonly attribute long width;
- *   readonly attribute long height;
- *   readonly attribute long bitrate;
- *            attribute boolean enabled;
- * };
- *
- * @class QualityLevel
+ * @param {Player} player Player object.
+ * @param {Object} options Plugin options object.
+ * @function initPlugin
  */
-var QualityLevel =
 
-/**
- * Creates a QualityLevel
- *
- * @param {Representation|Object} representation The representation of the quality level
- * @param {string}   representation.id        Unique id of the QualityLevel
- * @param {number=}  representation.width     Resolution width of the QualityLevel
- * @param {number=}  representation.height    Resolution height of the QualityLevel
- * @param {number}   representation.bandwidth Bitrate of the QualityLevel
- * @param {Function} representation.enabled   Callback to enable/disable QualityLevel
- */
-function QualityLevel(representation) {
-  _classCallCheck(this, QualityLevel);
+var initPlugin = function initPlugin(player, options) {
+  var originalPluginFn = player.qualityLevels;
+  var qualityLevelList = new QualityLevelList();
 
-  var level = this; // eslint-disable-line
+  var disposeHandler = function disposeHandler() {
+    qualityLevelList.dispose();
+    player.qualityLevels = originalPluginFn;
+    player.off('dispose', disposeHandler);
+  };
 
-  if (_video2['default'].browser.IS_IE8) {
-    level = _document2['default'].createElement('custom');
-    for (var prop in QualityLevel.prototype) {
-      if (prop !== 'constructor') {
-        level[prop] = QualityLevel.prototype[prop];
-      }
-    }
-  }
+  player.on('dispose', disposeHandler);
 
-  level.id = representation.id;
-  level.label = level.id;
-  level.width = representation.width;
-  level.height = representation.height;
-  level.bitrate = representation.bandwidth;
-  level.enabled_ = representation.enabled;
+  player.qualityLevels = function () {
+    return qualityLevelList;
+  };
 
-  Object.defineProperty(level, 'enabled', {
-    /**
-     * Get whether the QualityLevel is enabled.
-     *
-     * @returns {boolean} True if the QualityLevel is enabled.
-     */
-    get: function get() {
-      return level.enabled_();
-    },
-
-
-    /**
-     * Enable or disable the QualityLevel.
-     *
-     * @param {boolean} enable true to enable QualityLevel, false to disable.
-     */
-    set: function set(enable) {
-      level.enabled_(enable);
-    }
-  });
-
-  return level;
+  player.qualityLevels.VERSION = version;
+  return qualityLevelList;
 };
+/**
+ * A video.js plugin.
+ *
+ * In the plugin function, the value of `this` is a video.js `Player`
+ * instance. You cannot rely on the player being in a "ready" state here,
+ * depending on how the plugin is invoked. This may or may not be important
+ * to you; if not, remove the wait for "ready"!
+ *
+ * @param {Object} options Plugin options object
+ * @function qualityLevels
+ */
 
-exports['default'] = QualityLevel;
+
+var qualityLevels = function qualityLevels(options) {
+  return initPlugin(this, videojs.mergeOptions({}, options));
+}; // Register the plugin with video.js.
+
+
+registerPlugin('qualityLevels', qualityLevels); // Include the version number.
+
+qualityLevels.VERSION = version;
+
+module.exports = qualityLevels;
+
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"global/document":7}],58:[function(require,module,exports){
+},{"global/document":7}],56:[function(require,module,exports){
 // By default assume browserify was used to bundle app. These arguments are passed to
 // the module by browserify.
 var bundleFn = arguments[3];
@@ -12848,7 +12801,7 @@ module.exports = function webwackify(fn, fnModuleId) {
   return worker;
 };
 
-},{}],59:[function(require,module,exports){
+},{}],57:[function(require,module,exports){
 /**
  * @file ad-cue-tags.js
  */
@@ -12962,7 +12915,7 @@ exports['default'] = {
 };
 module.exports = exports['default'];
 
-},{"global/window":8}],60:[function(require,module,exports){
+},{"global/window":8}],58:[function(require,module,exports){
 /**
  * @file bin-utils.js
  */
@@ -13080,7 +13033,7 @@ var utils = {
 exports['default'] = utils;
 module.exports = exports['default'];
 
-},{}],61:[function(require,module,exports){
+},{}],59:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -13100,7 +13053,7 @@ exports["default"] = {
 };
 module.exports = exports["default"];
 
-},{}],62:[function(require,module,exports){
+},{}],60:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -13149,7 +13102,7 @@ exports['default'] = function (self) {
 
 module.exports = exports['default'];
 
-},{"./bin-utils":60,"aes-decrypter":4,"global/window":8}],63:[function(require,module,exports){
+},{"./bin-utils":58,"aes-decrypter":4,"global/window":8}],61:[function(require,module,exports){
 (function (global){
 /**
  * @file master-playlist-controller.js
@@ -14514,7 +14467,7 @@ var MasterPlaylistController = (function (_videojs$EventTarget) {
 exports.MasterPlaylistController = MasterPlaylistController;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./ad-cue-tags":59,"./config":61,"./decrypter-worker":62,"./media-groups":64,"./playlist-loader":67,"./playlist.js":69,"./ranges":70,"./segment-loader":74,"./sync-controller":76,"./util/codecs.js":77,"./vtt-segment-loader":79,"videojs-contrib-media-sources/es5/codec-utils":44,"webwackify":58}],64:[function(require,module,exports){
+},{"./ad-cue-tags":57,"./config":59,"./decrypter-worker":60,"./media-groups":62,"./playlist-loader":65,"./playlist.js":67,"./ranges":68,"./segment-loader":72,"./sync-controller":74,"./util/codecs.js":75,"./vtt-segment-loader":77,"videojs-contrib-media-sources/es5/codec-utils":44,"webwackify":56}],62:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -15272,7 +15225,7 @@ var createMediaTypes = function createMediaTypes() {
 exports.createMediaTypes = createMediaTypes;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./playlist-loader":67}],65:[function(require,module,exports){
+},{"./playlist-loader":65}],63:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -15723,7 +15676,7 @@ var mediaSegmentRequest = function mediaSegmentRequest(xhr, xhrOptions, decrypti
 exports.mediaSegmentRequest = mediaSegmentRequest;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./bin-utils":60}],66:[function(require,module,exports){
+},{"./bin-utils":58}],64:[function(require,module,exports){
 (function (global){
 /**
  * @file playback-watcher.js
@@ -16177,7 +16130,7 @@ exports['default'] = PlaybackWatcher;
 module.exports = exports['default'];
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./ranges":70,"global/window":8}],67:[function(require,module,exports){
+},{"./ranges":68,"global/window":8}],65:[function(require,module,exports){
 (function (global){
 /**
  * @file playlist-loader.js
@@ -16779,7 +16732,7 @@ var PlaylistLoader = (function (_EventTarget) {
 exports['default'] = PlaylistLoader;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./resolve-url":73,"global/window":8,"m3u8-parser":9}],68:[function(require,module,exports){
+},{"./resolve-url":71,"global/window":8,"m3u8-parser":9}],66:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -17210,7 +17163,7 @@ var lowestBitrateCompatibleVariantSelector = function lowestBitrateCompatibleVar
 };
 exports.lowestBitrateCompatibleVariantSelector = lowestBitrateCompatibleVariantSelector;
 
-},{"./config":61,"./playlist":69,"./util/codecs.js":77}],69:[function(require,module,exports){
+},{"./config":59,"./playlist":67,"./util/codecs.js":75}],67:[function(require,module,exports){
 (function (global){
 /**
  * @file playlist.js
@@ -17798,7 +17751,7 @@ exports['default'] = {
 };
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"global/window":8}],70:[function(require,module,exports){
+},{"global/window":8}],68:[function(require,module,exports){
 (function (global){
 /**
  * ranges
@@ -18181,7 +18134,7 @@ exports['default'] = {
 module.exports = exports['default'];
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],71:[function(require,module,exports){
+},{}],69:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -18319,7 +18272,7 @@ exports['default'] = reloadSourceOnError;
 module.exports = exports['default'];
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],72:[function(require,module,exports){
+},{}],70:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -18428,7 +18381,7 @@ var renditionSelectionMixin = function renditionSelectionMixin(hlsHandler) {
 exports['default'] = renditionSelectionMixin;
 module.exports = exports['default'];
 
-},{"./playlist.js":69}],73:[function(require,module,exports){
+},{"./playlist.js":67}],71:[function(require,module,exports){
 /**
  * @file resolve-url.js
  */
@@ -18466,7 +18419,7 @@ var resolveUrl = function resolveUrl(baseURL, relativeURL) {
 exports['default'] = resolveUrl;
 module.exports = exports['default'];
 
-},{"global/window":8,"url-toolkit":42}],74:[function(require,module,exports){
+},{"global/window":8,"url-toolkit":42}],72:[function(require,module,exports){
 (function (global){
 /**
  * @file segment-loader.js
@@ -19873,7 +19826,7 @@ var SegmentLoader = (function (_videojs$EventTarget) {
 exports['default'] = SegmentLoader;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./bin-utils":60,"./config":61,"./media-segment-request":65,"./playlist":69,"./playlist-selectors":68,"./ranges":70,"./source-updater":75,"global/window":8,"videojs-contrib-media-sources/es5/remove-cues-from-track.js":51}],75:[function(require,module,exports){
+},{"./bin-utils":58,"./config":59,"./media-segment-request":63,"./playlist":67,"./playlist-selectors":66,"./ranges":68,"./source-updater":73,"global/window":8,"videojs-contrib-media-sources/es5/remove-cues-from-track.js":51}],73:[function(require,module,exports){
 (function (global){
 /**
  * @file source-updater.js
@@ -20095,7 +20048,7 @@ exports['default'] = SourceUpdater;
 module.exports = exports['default'];
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],76:[function(require,module,exports){
+},{}],74:[function(require,module,exports){
 (function (global){
 /**
  * @file sync-controller.js
@@ -20704,7 +20657,7 @@ var SyncController = (function (_videojs$EventTarget) {
 exports['default'] = SyncController;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./playlist":69,"mux.js/lib/mp4/probe":33,"mux.js/lib/tools/ts-inspector.js":35}],77:[function(require,module,exports){
+},{"./playlist":67,"mux.js/lib/mp4/probe":33,"mux.js/lib/tools/ts-inspector.js":35}],75:[function(require,module,exports){
 
 /**
  * @file - codecs.js - Handles tasks regarding codec strings such as translating them to
@@ -20747,7 +20700,7 @@ var parseCodecs = function parseCodecs() {
 };
 exports.parseCodecs = parseCodecs;
 
-},{}],78:[function(require,module,exports){
+},{}],76:[function(require,module,exports){
 (function (global){
 /**
  * @file videojs-contrib-hls.js
@@ -21439,7 +21392,7 @@ module.exports = {
 };
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./bin-utils":60,"./config":61,"./master-playlist-controller":63,"./playback-watcher":66,"./playlist":69,"./playlist-loader":67,"./playlist-selectors.js":68,"./reload-source-on-error":71,"./rendition-mixin":72,"./xhr":80,"aes-decrypter":4,"global/document":7,"global/window":8,"m3u8-parser":9,"videojs-contrib-media-sources":53}],79:[function(require,module,exports){
+},{"./bin-utils":58,"./config":59,"./master-playlist-controller":61,"./playback-watcher":64,"./playlist":67,"./playlist-loader":65,"./playlist-selectors.js":66,"./reload-source-on-error":69,"./rendition-mixin":70,"./xhr":78,"aes-decrypter":4,"global/document":7,"global/window":8,"m3u8-parser":9,"videojs-contrib-media-sources":53}],77:[function(require,module,exports){
 (function (global){
 /**
  * @file vtt-segment-loader.js
@@ -21904,7 +21857,7 @@ exports['default'] = VTTSegmentLoader;
 module.exports = exports['default'];
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./bin-utils":60,"./segment-loader":74,"global/window":8,"videojs-contrib-media-sources/es5/remove-cues-from-track.js":51}],80:[function(require,module,exports){
+},{"./bin-utils":58,"./segment-loader":72,"global/window":8,"videojs-contrib-media-sources/es5/remove-cues-from-track.js":51}],78:[function(require,module,exports){
 (function (global){
 /**
  * @file xhr.js
@@ -21994,7 +21947,7 @@ exports['default'] = xhrFactory;
 module.exports = exports['default'];
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],81:[function(require,module,exports){
+},{}],79:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -22265,7 +22218,7 @@ _qunit2['default'].test('findAdCue returns correct cue', function (assert) {
 });
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"../src/ad-cue-tags":59,"global/window":8}],82:[function(require,module,exports){
+},{"../src/ad-cue-tags":57,"global/window":8}],80:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -22655,7 +22608,7 @@ _qunit2['default'].test('global mode override - html', function (assert) {
 });
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"../src/config":61,"../src/videojs-contrib-hls":78,"./test-helpers.js":100}],83:[function(require,module,exports){
+},{"../src/config":59,"../src/videojs-contrib-hls":76,"./test-helpers.js":98}],81:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -23790,7 +23743,7 @@ var LoaderCommonFactory = function LoaderCommonFactory(LoaderConstructor, loader
 exports.LoaderCommonFactory = LoaderCommonFactory;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"../src/config":61,"../src/decrypter-worker":62,"../src/master-playlist-controller":63,"../src/sync-controller":76,"../src/xhr":80,"./test-helpers.js":100,"webwackify":58}],84:[function(require,module,exports){
+},{"../src/config":59,"../src/decrypter-worker":60,"../src/master-playlist-controller":61,"../src/sync-controller":74,"../src/xhr":78,"./test-helpers.js":98,"webwackify":56}],82:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -26006,7 +25959,7 @@ _qunit2['default'].test('maps legacy AVC codecs', function (assert) {
 });
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"../src/config":61,"../src/master-playlist-controller":63,"../src/playlist":69,"../src/videojs-contrib-hls":78,"./test-helpers.js":100,"./test-manifests.js":101}],85:[function(require,module,exports){
+},{"../src/config":59,"../src/master-playlist-controller":61,"../src/playlist":67,"../src/videojs-contrib-hls":76,"./test-helpers.js":98,"./test-manifests.js":99}],83:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -26715,7 +26668,7 @@ _qunit2['default'].test('initialize closed-captions correctly generates tracks a
 });
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"../src/media-groups":64,"./test-helpers.js":100}],86:[function(require,module,exports){
+},{"../src/media-groups":62,"./test-helpers.js":98}],84:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -27039,7 +26992,7 @@ _qunit2['default'].test('waits for every request to finish before the callback i
 });
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"../src/decrypter-worker":62,"../src/media-segment-request":65,"../src/xhr":80,"./test-helpers":100,"webwackify":58}],87:[function(require,module,exports){
+},{"../src/decrypter-worker":60,"../src/media-segment-request":63,"../src/xhr":78,"./test-helpers":98,"webwackify":56}],85:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -27710,7 +27663,7 @@ _qunit2['default'].test('detects beyond seekable window', function (assert) {
 });
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"../src/playback-watcher":66,"./test-helpers.js":100}],88:[function(require,module,exports){
+},{"../src/playback-watcher":64,"./test-helpers.js":98}],86:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -27802,7 +27755,7 @@ _qunit2['default'].test('Advanced Bip Bop preload=none', function (assert) {
 });
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"../src/videojs-contrib-hls":78}],89:[function(require,module,exports){
+},{"../src/videojs-contrib-hls":76}],87:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -29178,7 +29131,7 @@ _qunit2['default'].test('does not misintrepret playlists missing newlines at the
 });
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"../src/playlist-loader":67,"../src/xhr":80,"./test-helpers":100,"global/window":8}],90:[function(require,module,exports){
+},{"../src/playlist-loader":65,"../src/xhr":78,"./test-helpers":98,"global/window":8}],88:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -29322,7 +29275,7 @@ var _srcConfig2 = _interopRequireDefault(_srcConfig);
 });
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"../src/config":61,"../src/playlist-selectors":68}],91:[function(require,module,exports){
+},{"../src/config":59,"../src/playlist-selectors":66}],89:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -30226,7 +30179,7 @@ _qunit2['default'].test('accounts for non-zero starting segment time when calcul
 });
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"../src/playlist":69,"../src/playlist-loader":67,"../src/xhr":80,"./test-helpers":100}],92:[function(require,module,exports){
+},{"../src/playlist":67,"../src/playlist-loader":65,"../src/xhr":78,"./test-helpers":98}],90:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -30466,7 +30419,7 @@ _qunit2['default'].test('creates printable ranges', function (assert) {
 });
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"../src/ranges":70}],93:[function(require,module,exports){
+},{"../src/ranges":68}],91:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -30717,7 +30670,7 @@ _qunit2['default'].test('should not set source if getSource returns null or unde
 });
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"../src/reload-source-on-error":71}],94:[function(require,module,exports){
+},{"../src/reload-source-on-error":69}],92:[function(require,module,exports){
 (function (global){
 /* eslint-disable max-len */
 
@@ -30962,7 +30915,7 @@ _qunit2['default'].test('changing the enabled state of a representation calls fa
 });
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"../src/rendition-mixin.js":72}],95:[function(require,module,exports){
+},{"../src/rendition-mixin.js":70}],93:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -30996,7 +30949,7 @@ _qunit2['default'].test('works with a selection of valid urls', function (assert
 });
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"../src/resolve-url":73,"global/window":8}],96:[function(require,module,exports){
+},{"../src/resolve-url":71,"global/window":8}],94:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -31051,7 +31004,7 @@ _qunit2['default'].test('the environment is sane', function (assert) {
 });
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"global/document":7}],97:[function(require,module,exports){
+},{"global/document":7}],95:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -31919,7 +31872,7 @@ _qunit2['default'].module('SegmentLoader', function (hooks) {
 });
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"../src/segment-loader":74,"./loader-common.js":83,"./test-helpers.js":100,"mux.js/lib/mp4/probe":33}],98:[function(require,module,exports){
+},{"../src/segment-loader":72,"./loader-common.js":81,"./test-helpers.js":98,"mux.js/lib/mp4/probe":33}],96:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -32113,7 +32066,7 @@ _qunit2['default'].test('supports timestampOffset', function (assert) {
 });
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"../src/source-updater":75,"./test-helpers":100}],99:[function(require,module,exports){
+},{"../src/source-updater":73,"./test-helpers":98}],97:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -32526,7 +32479,7 @@ _qunit2['default'].test('Correctly calculates expired time', function (assert) {
 });
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"../src/sync-controller.js":76,"./test-helpers.js":100}],100:[function(require,module,exports){
+},{"../src/sync-controller.js":74,"./test-helpers.js":98}],98:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -33009,7 +32962,7 @@ var playlistWithDuration = function playlistWithDuration(time, conf) {
 exports.playlistWithDuration = playlistWithDuration;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"../src/xhr":80,"./test-manifests.js":101,"global/document":7,"global/window":8,"videojs-contrib-media-sources":53}],101:[function(require,module,exports){
+},{"../src/xhr":78,"./test-manifests.js":99,"global/document":7,"global/window":8,"videojs-contrib-media-sources":53}],99:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -33081,7 +33034,7 @@ exports['default'] = {
 };
 module.exports = exports['default'];
 
-},{}],102:[function(require,module,exports){
+},{}],100:[function(require,module,exports){
 (function (global){
 /* eslint-disable max-len */'use strict';function _interopRequireDefault(obj){return obj && obj.__esModule?obj:{'default':obj};}var _globalDocument=require('global/document');var _globalDocument2=_interopRequireDefault(_globalDocument);var _videoJs=(typeof window !== "undefined" ? window['videojs'] : typeof global !== "undefined" ? global['videojs'] : null);var _videoJs2=_interopRequireDefault(_videoJs);var _videoJs3=_interopRequireDefault(_videoJs);var _qunit=(typeof window !== "undefined" ? window['QUnit'] : typeof global !== "undefined" ? global['QUnit'] : null);var _qunit2=_interopRequireDefault(_qunit);var _testManifestsJs=require('./test-manifests.js');var _testManifestsJs2=_interopRequireDefault(_testManifestsJs);var _testHelpersJs=require('./test-helpers.js'); /* eslint-disable no-unused-vars */ // we need this so that it can register hls with videojs
 var _srcVideojsContribHls=require('../src/videojs-contrib-hls');var _globalWindow=require('global/window');var _globalWindow2=_interopRequireDefault(_globalWindow); // we need this so the plugin registers itself
@@ -33271,7 +33224,7 @@ assert.ok(hls.playlists.media().excludeUntil > 0,'blacklisted playlist');assert.
 assert.equal(hls.stats.mediaBytesTransferred,1024,'1024 bytes');assert.equal(hls.stats.mediaRequests,1,'1 request');});
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"../src/videojs-contrib-hls":78,"./test-helpers.js":100,"./test-manifests.js":101,"global/document":7,"global/window":8,"videojs-contrib-quality-levels":55}],103:[function(require,module,exports){
+},{"../src/videojs-contrib-hls":76,"./test-helpers.js":98,"./test-manifests.js":99,"global/document":7,"global/window":8,"videojs-contrib-quality-levels":55}],101:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -33802,7 +33755,7 @@ _qunit2['default'].module('VTTSegmentLoader', function (hooks) {
 });
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"../src/vtt-segment-loader":79,"./loader-common.js":83,"./test-helpers.js":100}],104:[function(require,module,exports){
+},{"../src/vtt-segment-loader":77,"./loader-common.js":81,"./test-helpers.js":98}],102:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -33865,4 +33818,4 @@ _qunit2['default'].test('xhr respects beforeRequest', function (assert) {
 });
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"../src/xhr":80,"./test-helpers.js":100}]},{},[81,82,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,102,103,104]);
+},{"../src/xhr":78,"./test-helpers.js":98}]},{},[79,80,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,100,101,102]);

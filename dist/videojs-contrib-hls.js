@@ -17570,8 +17570,8 @@ module.exports = function unpad(padded) {
 (function(root) { 
 /* jshint ignore:end */
 
-  var URL_REGEX = /^((?:[a-zA-Z0-9+\-.]+:)?)(\/\/[^\/\;?#]*)?(.*?)??(;.*?)?(\?.*?)?(#.*?)?$/;
-  var FIRST_SEGMENT_REGEX = /^([^\/;?#]*)(.*)$/;
+  var URL_REGEX = /^((?:[a-zA-Z0-9+\-.]+:)?)(\/\/[^\/?#]*)?((?:[^\/\?#]*\/)*.*?)??(;.*?)?(\?.*?)?(#.*?)?$/;
+  var FIRST_SEGMENT_REGEX = /^([^\/?#]*)(.*)$/;
   var SLASH_DOT_REGEX = /(?:\/|^)\.(?=\/)/g;
   var SLASH_DOT_DOT_REGEX = /(?:\/|^)\.\.\/(?!\.\.\/).*?(?=\/)/g;
 

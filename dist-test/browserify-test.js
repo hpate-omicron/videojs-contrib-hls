@@ -1657,7 +1657,7 @@ var MasterPlaylistController = (function (_videojs$EventTarget) {
 })(_videoJs2['default'].EventTarget);
 
 exports.MasterPlaylistController = MasterPlaylistController;
-},{"./ad-cue-tags":1,"./config":3,"./decrypter-worker":4,"./media-groups":6,"./playlist-loader":9,"./playlist.js":11,"./ranges":12,"./segment-loader":16,"./sync-controller":18,"./util/codecs.js":19,"./vtt-segment-loader":21,"video.js":71,"videojs-contrib-media-sources/es5/codec-utils":73,"webwackify":88}],6:[function(require,module,exports){
+},{"./ad-cue-tags":1,"./config":3,"./decrypter-worker":4,"./media-groups":6,"./playlist-loader":9,"./playlist.js":11,"./ranges":12,"./segment-loader":16,"./sync-controller":18,"./util/codecs.js":19,"./vtt-segment-loader":21,"video.js":72,"videojs-contrib-media-sources/es5/codec-utils":74,"webwackify":89}],6:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -2412,7 +2412,7 @@ var createMediaTypes = function createMediaTypes() {
   return mediaTypes;
 };
 exports.createMediaTypes = createMediaTypes;
-},{"./playlist-loader":9,"video.js":71}],7:[function(require,module,exports){
+},{"./playlist-loader":9,"video.js":72}],7:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -2860,7 +2860,7 @@ var mediaSegmentRequest = function mediaSegmentRequest(xhr, xhrOptions, decrypti
   };
 };
 exports.mediaSegmentRequest = mediaSegmentRequest;
-},{"./bin-utils":2,"video.js":71}],8:[function(require,module,exports){
+},{"./bin-utils":2,"video.js":72}],8:[function(require,module,exports){
 /**
  * @file playback-watcher.js
  *
@@ -3311,7 +3311,7 @@ var PlaybackWatcher = (function () {
 
 exports['default'] = PlaybackWatcher;
 module.exports = exports['default'];
-},{"./ranges":12,"global/window":31,"video.js":71}],9:[function(require,module,exports){
+},{"./ranges":12,"global/window":31,"video.js":72}],9:[function(require,module,exports){
 /**
  * @file playlist-loader.js
  *
@@ -3910,7 +3910,7 @@ var PlaylistLoader = (function (_EventTarget) {
 })(_videoJs.EventTarget);
 
 exports['default'] = PlaylistLoader;
-},{"./resolve-url":15,"global/window":31,"m3u8-parser":33,"video.js":71}],10:[function(require,module,exports){
+},{"./resolve-url":15,"global/window":31,"m3u8-parser":34,"video.js":72}],10:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -4925,7 +4925,7 @@ exports['default'] = {
   estimateSegmentRequestTime: estimateSegmentRequestTime,
   isLowestEnabledRendition: isLowestEnabledRendition
 };
-},{"global/window":31,"video.js":71}],12:[function(require,module,exports){
+},{"global/window":31,"video.js":72}],12:[function(require,module,exports){
 /**
  * ranges
  *
@@ -5305,7 +5305,7 @@ exports['default'] = {
   timeUntilRebuffer: timeUntilRebuffer
 };
 module.exports = exports['default'];
-},{"video.js":71}],13:[function(require,module,exports){
+},{"video.js":72}],13:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -5440,7 +5440,7 @@ var reloadSourceOnError = function reloadSourceOnError(options) {
 
 exports['default'] = reloadSourceOnError;
 module.exports = exports['default'];
-},{"video.js":71}],14:[function(require,module,exports){
+},{"video.js":72}],14:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -5585,7 +5585,7 @@ var resolveUrl = function resolveUrl(baseURL, relativeURL) {
 
 exports['default'] = resolveUrl;
 module.exports = exports['default'];
-},{"global/window":31,"url-toolkit":70}],16:[function(require,module,exports){
+},{"global/window":31,"url-toolkit":71}],16:[function(require,module,exports){
 /**
  * @file segment-loader.js
  */
@@ -6989,7 +6989,7 @@ var SegmentLoader = (function (_videojs$EventTarget) {
 })(_videoJs2['default'].EventTarget);
 
 exports['default'] = SegmentLoader;
-},{"./bin-utils":2,"./config":3,"./media-segment-request":7,"./playlist":11,"./playlist-selectors":10,"./ranges":12,"./source-updater":17,"global/window":31,"video.js":71,"videojs-contrib-media-sources/es5/remove-cues-from-track.js":80}],17:[function(require,module,exports){
+},{"./bin-utils":2,"./config":3,"./media-segment-request":7,"./playlist":11,"./playlist-selectors":10,"./ranges":12,"./source-updater":17,"global/window":31,"video.js":72,"videojs-contrib-media-sources/es5/remove-cues-from-track.js":81}],17:[function(require,module,exports){
 /**
  * @file source-updater.js
  */
@@ -7208,7 +7208,7 @@ var SourceUpdater = (function () {
 
 exports['default'] = SourceUpdater;
 module.exports = exports['default'];
-},{"video.js":71}],18:[function(require,module,exports){
+},{"video.js":72}],18:[function(require,module,exports){
 /**
  * @file sync-controller.js
  */
@@ -7814,7 +7814,7 @@ var SyncController = (function (_videojs$EventTarget) {
 })(_videoJs2['default'].EventTarget);
 
 exports['default'] = SyncController;
-},{"./playlist":11,"mux.js/lib/mp4/probe":57,"mux.js/lib/tools/ts-inspector.js":59,"video.js":71}],19:[function(require,module,exports){
+},{"./playlist":11,"mux.js/lib/mp4/probe":58,"mux.js/lib/tools/ts-inspector.js":60,"video.js":72}],19:[function(require,module,exports){
 
 /**
  * @file - codecs.js - Handles tasks regarding codec strings such as translating them to
@@ -8545,7 +8545,7 @@ module.exports = {
   HlsHandler: HlsHandler,
   HlsSourceHandler: HlsSourceHandler
 };
-},{"./bin-utils":2,"./config":3,"./master-playlist-controller":5,"./playback-watcher":8,"./playlist":11,"./playlist-loader":9,"./playlist-selectors.js":10,"./reload-source-on-error":13,"./rendition-mixin":14,"./xhr":22,"aes-decrypter":26,"global/document":30,"global/window":31,"m3u8-parser":33,"video.js":71,"videojs-contrib-media-sources":82}],21:[function(require,module,exports){
+},{"./bin-utils":2,"./config":3,"./master-playlist-controller":5,"./playback-watcher":8,"./playlist":11,"./playlist-loader":9,"./playlist-selectors.js":10,"./reload-source-on-error":13,"./rendition-mixin":14,"./xhr":22,"aes-decrypter":26,"global/document":30,"global/window":31,"m3u8-parser":34,"video.js":72,"videojs-contrib-media-sources":83}],21:[function(require,module,exports){
 /**
  * @file vtt-segment-loader.js
  */
@@ -9007,7 +9007,7 @@ var VTTSegmentLoader = (function (_SegmentLoader) {
 
 exports['default'] = VTTSegmentLoader;
 module.exports = exports['default'];
-},{"./bin-utils":2,"./segment-loader":16,"global/window":31,"video.js":71,"videojs-contrib-media-sources/es5/remove-cues-from-track.js":80}],22:[function(require,module,exports){
+},{"./bin-utils":2,"./segment-loader":16,"global/window":31,"video.js":72,"videojs-contrib-media-sources/es5/remove-cues-from-track.js":81}],22:[function(require,module,exports){
 /**
  * @file xhr.js
  */
@@ -9094,7 +9094,7 @@ var xhrFactory = function xhrFactory() {
 
 exports['default'] = xhrFactory;
 module.exports = exports['default'];
-},{"video.js":71}],23:[function(require,module,exports){
+},{"video.js":72}],23:[function(require,module,exports){
 /**
  * @file aes.js
  *
@@ -9605,7 +9605,7 @@ exports['default'] = {
   Decrypter: Decrypter,
   decrypt: decrypt
 };
-},{"./aes":23,"./async-stream":24,"pkcs7":65}],26:[function(require,module,exports){
+},{"./aes":23,"./async-stream":24,"pkcs7":66}],26:[function(require,module,exports){
 /**
  * @file index.js
  *
@@ -9770,54 +9770,70 @@ module.exports = exports['default'];
 },{}],28:[function(require,module,exports){
 
 },{}],29:[function(require,module,exports){
-var isFunction = require('is-function')
+'use strict';
 
-module.exports = forEach
+var isCallable = require('is-callable');
 
-var toString = Object.prototype.toString
-var hasOwnProperty = Object.prototype.hasOwnProperty
+var toStr = Object.prototype.toString;
+var hasOwnProperty = Object.prototype.hasOwnProperty;
 
-function forEach(list, iterator, context) {
-    if (!isFunction(iterator)) {
-        throw new TypeError('iterator must be a function')
-    }
-
-    if (arguments.length < 3) {
-        context = this
-    }
-    
-    if (toString.call(list) === '[object Array]')
-        forEachArray(list, iterator, context)
-    else if (typeof list === 'string')
-        forEachString(list, iterator, context)
-    else
-        forEachObject(list, iterator, context)
-}
-
-function forEachArray(array, iterator, context) {
+var forEachArray = function forEachArray(array, iterator, receiver) {
     for (var i = 0, len = array.length; i < len; i++) {
         if (hasOwnProperty.call(array, i)) {
-            iterator.call(context, array[i], i, array)
+            if (receiver == null) {
+                iterator(array[i], i, array);
+            } else {
+                iterator.call(receiver, array[i], i, array);
+            }
         }
     }
-}
+};
 
-function forEachString(string, iterator, context) {
+var forEachString = function forEachString(string, iterator, receiver) {
     for (var i = 0, len = string.length; i < len; i++) {
         // no such thing as a sparse string.
-        iterator.call(context, string.charAt(i), i, string)
-    }
-}
-
-function forEachObject(object, iterator, context) {
-    for (var k in object) {
-        if (hasOwnProperty.call(object, k)) {
-            iterator.call(context, object[k], k, object)
+        if (receiver == null) {
+            iterator(string.charAt(i), i, string);
+        } else {
+            iterator.call(receiver, string.charAt(i), i, string);
         }
     }
-}
+};
 
-},{"is-function":32}],30:[function(require,module,exports){
+var forEachObject = function forEachObject(object, iterator, receiver) {
+    for (var k in object) {
+        if (hasOwnProperty.call(object, k)) {
+            if (receiver == null) {
+                iterator(object[k], k, object);
+            } else {
+                iterator.call(receiver, object[k], k, object);
+            }
+        }
+    }
+};
+
+var forEach = function forEach(list, iterator, thisArg) {
+    if (!isCallable(iterator)) {
+        throw new TypeError('iterator must be a function');
+    }
+
+    var receiver;
+    if (arguments.length >= 3) {
+        receiver = thisArg;
+    }
+
+    if (toStr.call(list) === '[object Array]') {
+        forEachArray(list, iterator, receiver);
+    } else if (typeof list === 'string') {
+        forEachString(list, iterator, receiver);
+    } else {
+        forEachObject(list, iterator, receiver);
+    }
+};
+
+module.exports = forEach;
+
+},{"is-callable":32}],30:[function(require,module,exports){
 (function (global){
 var topLevel = typeof global !== 'undefined' ? global :
     typeof window !== 'undefined' ? window : {}
@@ -9856,6 +9872,45 @@ module.exports = win;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{}],32:[function(require,module,exports){
+'use strict';
+
+var fnToStr = Function.prototype.toString;
+
+var constructorRegex = /^\s*class\b/;
+var isES6ClassFn = function isES6ClassFunction(value) {
+	try {
+		var fnStr = fnToStr.call(value);
+		return constructorRegex.test(fnStr);
+	} catch (e) {
+		return false; // not a function
+	}
+};
+
+var tryFunctionObject = function tryFunctionToStr(value) {
+	try {
+		if (isES6ClassFn(value)) { return false; }
+		fnToStr.call(value);
+		return true;
+	} catch (e) {
+		return false;
+	}
+};
+var toStr = Object.prototype.toString;
+var fnClass = '[object Function]';
+var genClass = '[object GeneratorFunction]';
+var hasToStringTag = typeof Symbol === 'function' && typeof Symbol.toStringTag === 'symbol';
+
+module.exports = function isCallable(value) {
+	if (!value) { return false; }
+	if (typeof value !== 'function' && typeof value !== 'object') { return false; }
+	if (typeof value === 'function' && !value.prototype) { return true; }
+	if (hasToStringTag) { return tryFunctionObject(value); }
+	if (isES6ClassFn(value)) { return false; }
+	var strClass = toStr.call(value);
+	return strClass === fnClass || strClass === genClass;
+};
+
+},{}],33:[function(require,module,exports){
 module.exports = isFunction
 
 var toString = Object.prototype.toString
@@ -9872,7 +9927,7 @@ function isFunction (fn) {
       fn === window.prompt))
 };
 
-},{}],33:[function(require,module,exports){
+},{}],34:[function(require,module,exports){
 'use strict';
 
 var _lineStream = require('./line-stream');
@@ -9902,7 +9957,7 @@ module.exports = {
     * that do not assume the entirety of the manifest is ready and expose a
     * ReadableStream-like interface.
     */
-},{"./line-stream":34,"./parse-stream":35,"./parser":36}],34:[function(require,module,exports){
+},{"./line-stream":35,"./parse-stream":36,"./parser":37}],35:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -9971,7 +10026,7 @@ var LineStream = function (_Stream) {
 }(_stream2['default']);
 
 exports['default'] = LineStream;
-},{"./stream":37}],35:[function(require,module,exports){
+},{"./stream":38}],36:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -10424,7 +10479,7 @@ var ParseStream = function (_Stream) {
 }(_stream2['default']);
 
 exports['default'] = ParseStream;
-},{"./stream":37}],36:[function(require,module,exports){
+},{"./stream":38}],37:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -10815,7 +10870,7 @@ var Parser = function (_Stream) {
 }(_stream2['default']);
 
 exports['default'] = Parser;
-},{"./line-stream":34,"./parse-stream":35,"./stream":37}],37:[function(require,module,exports){
+},{"./line-stream":35,"./parse-stream":36,"./stream":38}],38:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -10948,7 +11003,7 @@ var Stream = function () {
 }();
 
 exports['default'] = Stream;
-},{}],38:[function(require,module,exports){
+},{}],39:[function(require,module,exports){
 /**
  * mux.js
  *
@@ -11093,7 +11148,7 @@ AacStream.prototype = new Stream();
 
 module.exports = AacStream;
 
-},{"../utils/stream.js":62}],39:[function(require,module,exports){
+},{"../utils/stream.js":63}],40:[function(require,module,exports){
 /**
  * mux.js
  *
@@ -11256,7 +11311,7 @@ module.exports = {
   parseAacTimestamp: parseAacTimestamp
 };
 
-},{}],40:[function(require,module,exports){
+},{}],41:[function(require,module,exports){
 'use strict';
 
 var Stream = require('../utils/stream.js');
@@ -11390,7 +11445,7 @@ AdtsStream.prototype = new Stream();
 
 module.exports = AdtsStream;
 
-},{"../utils/stream.js":62}],41:[function(require,module,exports){
+},{"../utils/stream.js":63}],42:[function(require,module,exports){
 'use strict';
 
 var Stream = require('../utils/stream.js');
@@ -11810,7 +11865,7 @@ module.exports = {
   NalByteStream: NalByteStream
 };
 
-},{"../utils/exp-golomb.js":61,"../utils/stream.js":62}],42:[function(require,module,exports){
+},{"../utils/exp-golomb.js":62,"../utils/stream.js":63}],43:[function(require,module,exports){
 var highPrefix = [33, 16, 5, 32, 164, 27];
 var lowPrefix = [33, 65, 108, 84, 1, 2, 4, 8, 168, 2, 4, 8, 17, 191, 252];
 var zeroFill = function(count) {
@@ -11847,7 +11902,7 @@ var coneOfSilence = {
 
 module.exports = makeTable(coneOfSilence);
 
-},{}],43:[function(require,module,exports){
+},{}],44:[function(require,module,exports){
 'use strict';
 
 var Stream = require('../utils/stream.js');
@@ -11994,7 +12049,7 @@ CoalesceStream.prototype.flush = function(flushSource) {
 
 module.exports = CoalesceStream;
 
-},{"../utils/stream.js":62}],44:[function(require,module,exports){
+},{"../utils/stream.js":63}],45:[function(require,module,exports){
 'use strict';
 
 var FlvTag = require('./flv-tag.js');
@@ -12056,7 +12111,7 @@ var getFlvHeader = function(duration, audio, video) { // :ByteArray {
 
 module.exports = getFlvHeader;
 
-},{"./flv-tag.js":45}],45:[function(require,module,exports){
+},{"./flv-tag.js":46}],46:[function(require,module,exports){
 /**
  * An object that stores the bytes of an FLV tag and methods for
  * querying and manipulating that data.
@@ -12430,14 +12485,14 @@ FlvTag.frameTime = function(tag) {
 
 module.exports = FlvTag;
 
-},{}],46:[function(require,module,exports){
+},{}],47:[function(require,module,exports){
 module.exports = {
   tag: require('./flv-tag'),
   Transmuxer: require('./transmuxer'),
   getFlvHeader: require('./flv-header')
 };
 
-},{"./flv-header":44,"./flv-tag":45,"./transmuxer":48}],47:[function(require,module,exports){
+},{"./flv-header":45,"./flv-tag":46,"./transmuxer":49}],48:[function(require,module,exports){
 'use strict';
 
 var TagList = function() {
@@ -12464,7 +12519,7 @@ var TagList = function() {
 
 module.exports = TagList;
 
-},{}],48:[function(require,module,exports){
+},{}],49:[function(require,module,exports){
 'use strict';
 
 var Stream = require('../utils/stream.js');
@@ -12913,7 +12968,7 @@ Transmuxer.prototype = new Stream();
 // forward compatibility
 module.exports = Transmuxer;
 
-},{"../codecs/adts.js":40,"../codecs/h264":41,"../m2ts/m2ts.js":50,"../utils/stream.js":62,"./coalesce-stream.js":43,"./flv-tag.js":45,"./tag-list.js":47}],49:[function(require,module,exports){
+},{"../codecs/adts.js":41,"../codecs/h264":42,"../m2ts/m2ts.js":51,"../utils/stream.js":63,"./coalesce-stream.js":44,"./flv-tag.js":46,"./tag-list.js":48}],50:[function(require,module,exports){
 /**
  * mux.js
  *
@@ -13771,7 +13826,7 @@ module.exports = {
   Cea608Stream: Cea608Stream
 };
 
-},{"../utils/stream":62}],50:[function(require,module,exports){
+},{"../utils/stream":63}],51:[function(require,module,exports){
 /**
  * mux.js
  *
@@ -14279,7 +14334,7 @@ for (var type in StreamTypes) {
 
 module.exports = m2ts;
 
-},{"../utils/stream.js":62,"./caption-stream":49,"./metadata-stream":51,"./stream-types":53,"./stream-types.js":53,"./timestamp-rollover-stream":54}],51:[function(require,module,exports){
+},{"../utils/stream.js":63,"./caption-stream":50,"./metadata-stream":52,"./stream-types":54,"./stream-types.js":54,"./timestamp-rollover-stream":55}],52:[function(require,module,exports){
 /**
  * Accepts program elementary stream (PES) data events and parses out
  * ID3 metadata from them, if present.
@@ -14529,7 +14584,7 @@ MetadataStream.prototype = new Stream();
 
 module.exports = MetadataStream;
 
-},{"../utils/stream":62,"./stream-types":53}],52:[function(require,module,exports){
+},{"../utils/stream":63,"./stream-types":54}],53:[function(require,module,exports){
 /**
  * mux.js
  *
@@ -14818,7 +14873,7 @@ module.exports = {
   videoPacketContainsKeyFrame: videoPacketContainsKeyFrame
 };
 
-},{"./stream-types.js":53}],53:[function(require,module,exports){
+},{"./stream-types.js":54}],54:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -14827,7 +14882,7 @@ module.exports = {
   METADATA_STREAM_TYPE: 0x15
 };
 
-},{}],54:[function(require,module,exports){
+},{}],55:[function(require,module,exports){
 /**
  * mux.js
  *
@@ -14913,7 +14968,7 @@ module.exports = {
   handleRollover: handleRollover
 };
 
-},{"../utils/stream":62}],55:[function(require,module,exports){
+},{"../utils/stream":63}],56:[function(require,module,exports){
 module.exports = {
   generator: require('./mp4-generator'),
   Transmuxer: require('./transmuxer').Transmuxer,
@@ -14921,7 +14976,7 @@ module.exports = {
   VideoSegmentStream: require('./transmuxer').VideoSegmentStream
 };
 
-},{"./mp4-generator":56,"./transmuxer":58}],56:[function(require,module,exports){
+},{"./mp4-generator":57,"./transmuxer":59}],57:[function(require,module,exports){
 /**
  * mux.js
  *
@@ -15693,7 +15748,7 @@ module.exports = {
   }
 };
 
-},{}],57:[function(require,module,exports){
+},{}],58:[function(require,module,exports){
 /**
  * mux.js
  *
@@ -15883,7 +15938,7 @@ module.exports = {
   startTime: startTime
 };
 
-},{}],58:[function(require,module,exports){
+},{}],59:[function(require,module,exports){
 /**
  * mux.js
  *
@@ -17339,7 +17394,7 @@ module.exports = {
   VIDEO_PROPERTIES: VIDEO_PROPERTIES
 };
 
-},{"../aac":38,"../codecs/adts.js":40,"../codecs/h264":41,"../data/silence":42,"../m2ts/m2ts.js":50,"../utils/clock":60,"../utils/stream.js":62,"./mp4-generator.js":56}],59:[function(require,module,exports){
+},{"../aac":39,"../codecs/adts.js":41,"../codecs/h264":42,"../data/silence":43,"../m2ts/m2ts.js":51,"../utils/clock":61,"../utils/stream.js":63,"./mp4-generator.js":57}],60:[function(require,module,exports){
 /**
  * mux.js
  *
@@ -17853,7 +17908,7 @@ module.exports = {
   inspect: inspect
 };
 
-},{"../aac/probe.js":39,"../m2ts/probe.js":52,"../m2ts/stream-types.js":53,"../m2ts/timestamp-rollover-stream.js":54}],60:[function(require,module,exports){
+},{"../aac/probe.js":40,"../m2ts/probe.js":53,"../m2ts/stream-types.js":54,"../m2ts/timestamp-rollover-stream.js":55}],61:[function(require,module,exports){
 var
   ONE_SECOND_IN_TS = 90000, // 90kHz clock
   secondsToVideoTs,
@@ -17896,7 +17951,7 @@ module.exports = {
   videoTsToAudioTs: videoTsToAudioTs
 };
 
-},{}],61:[function(require,module,exports){
+},{}],62:[function(require,module,exports){
 'use strict';
 
 var ExpGolomb;
@@ -18045,7 +18100,7 @@ ExpGolomb = function(workingData) {
 
 module.exports = ExpGolomb;
 
-},{}],62:[function(require,module,exports){
+},{}],63:[function(require,module,exports){
 /**
  * mux.js
  *
@@ -18164,7 +18219,7 @@ Stream.prototype.flush = function(flushSource) {
 
 module.exports = Stream;
 
-},{}],63:[function(require,module,exports){
+},{}],64:[function(require,module,exports){
 var trim = require('trim')
   , forEach = require('for-each')
   , isArray = function(arg) {
@@ -18196,7 +18251,7 @@ module.exports = function (headers) {
 
   return result
 }
-},{"for-each":29,"trim":68}],64:[function(require,module,exports){
+},{"for-each":29,"trim":69}],65:[function(require,module,exports){
 /*
  * pkcs7.pad
  * https://github.com/brightcove/pkcs7
@@ -18282,7 +18337,7 @@ PADDING = [
   [1]
 ];
 
-},{}],65:[function(require,module,exports){
+},{}],66:[function(require,module,exports){
 /*
  * pkcs7
  * https://github.com/brightcove/pkcs7
@@ -18296,7 +18351,7 @@ PADDING = [
 exports.pad = require('./pad.js');
 exports.unpad = require('./unpad.js');
 
-},{"./pad.js":64,"./unpad.js":66}],66:[function(require,module,exports){
+},{"./pad.js":65,"./unpad.js":67}],67:[function(require,module,exports){
 /*
  * pkcs7.unpad
  * https://github.com/brightcove/pkcs7
@@ -18317,7 +18372,7 @@ module.exports = function unpad(padded) {
   return padded.subarray(0, padded.byteLength - padded[padded.byteLength - 1]);
 };
 
-},{}],67:[function(require,module,exports){
+},{}],68:[function(require,module,exports){
 module.exports = SafeParseTuple
 
 function SafeParseTuple(obj, reviver) {
@@ -18333,7 +18388,7 @@ function SafeParseTuple(obj, reviver) {
     return [error, json]
 }
 
-},{}],68:[function(require,module,exports){
+},{}],69:[function(require,module,exports){
 
 exports = module.exports = trim;
 
@@ -18349,7 +18404,7 @@ exports.right = function(str){
   return str.replace(/\s*$/, '');
 };
 
-},{}],69:[function(require,module,exports){
+},{}],70:[function(require,module,exports){
 function clean (s) {
   return s.replace(/\n\r?\s*/g, '')
 }
@@ -18364,15 +18419,15 @@ module.exports = function tsml (sa) {
 
   return s
 }
-},{}],70:[function(require,module,exports){
+},{}],71:[function(require,module,exports){
 // see https://tools.ietf.org/html/rfc1808
 
 /* jshint ignore:start */
 (function(root) { 
 /* jshint ignore:end */
 
-  var URL_REGEX = /^((?:[a-zA-Z0-9+\-.]+:)?)(\/\/[^\/\;?#]*)?(.*?)??(;.*?)?(\?.*?)?(#.*?)?$/;
-  var FIRST_SEGMENT_REGEX = /^([^\/;?#]*)(.*)$/;
+  var URL_REGEX = /^((?:[a-zA-Z0-9+\-.]+:)?)(\/\/[^\/?#]*)?((?:[^\/\?#]*\/)*.*?)??(;.*?)?(\?.*?)?(#.*?)?$/;
+  var FIRST_SEGMENT_REGEX = /^([^\/?#]*)(.*)$/;
   var SLASH_DOT_REGEX = /(?:\/|^)\.(?=\/)/g;
   var SLASH_DOT_DOT_REGEX = /(?:\/|^)\.\.\/(?!\.\.\/).*?(?=\/)/g;
 
@@ -18529,10 +18584,10 @@ module.exports = function tsml (sa) {
 })(this);
 /* jshint ignore:end */
 
-},{}],71:[function(require,module,exports){
+},{}],72:[function(require,module,exports){
 /**
  * @license
- * Video.js 6.10.1 <http://videojs.com/>
+ * Video.js 6.12.1 <http://videojs.com/>
  * Copyright Brightcove, Inc. <https://www.brightcove.com/>
  * Available under Apache License Version 2.0
  * <https://github.com/videojs/video.js/blob/master/LICENSE>
@@ -18551,7 +18606,7 @@ var safeParseTuple = _interopDefault(require('safe-json-parse/tuple'));
 var xhr = _interopDefault(require('xhr'));
 var vtt = _interopDefault(require('videojs-vtt.js'));
 
-var version = "6.10.1";
+var version = "6.12.1";
 
 /**
  * @file browser.js
@@ -18613,12 +18668,12 @@ var IS_NATIVE_ANDROID = IS_ANDROID && ANDROID_VERSION < 5 && appleWebkitVersion 
 
 var IS_FIREFOX = /Firefox/i.test(USER_AGENT);
 var IS_EDGE = /Edge/i.test(USER_AGENT);
-var IS_CHROME = !IS_EDGE && /Chrome/i.test(USER_AGENT);
+var IS_CHROME = !IS_EDGE && (/Chrome/i.test(USER_AGENT) || /CriOS/i.test(USER_AGENT));
 var CHROME_VERSION = function () {
-  var match = USER_AGENT.match(/Chrome\/(\d+)/);
+  var match = USER_AGENT.match(/(Chrome|CriOS)\/(\d+)/);
 
-  if (match && match[1]) {
-    return parseFloat(match[1]);
+  if (match && match[2]) {
+    return parseFloat(match[2]);
   }
   return null;
 }();
@@ -18636,9 +18691,9 @@ var IE_VERSION = function () {
 }();
 
 var IS_SAFARI = /Safari/i.test(USER_AGENT) && !IS_CHROME && !IS_ANDROID && !IS_EDGE;
-var IS_ANY_SAFARI = IS_SAFARI || IS_IOS;
+var IS_ANY_SAFARI = (IS_SAFARI || IS_IOS) && !IS_CHROME;
 
-var TOUCH_ENABLED = isReal() && ('ontouchstart' in window || window.DocumentTouch && window.document instanceof window.DocumentTouch);
+var TOUCH_ENABLED = isReal() && ('ontouchstart' in window || window.navigator.maxTouchPoints || window.DocumentTouch && window.document instanceof window.DocumentTouch);
 
 var BACKGROUND_SIZE_SUPPORTED = isReal() && 'backgroundSize' in window.document.createElement('video').style;
 
@@ -22986,9 +23041,9 @@ var Component = function () {
    *    {@link Component#dispose} gets called.
    * 2. The function callback will gets turned into a {@link Component~GenericCallback}
    *
-   * > Note: You can use `window.clearTimeout` on the id returned by this function. This
+   * > Note: You can't use `window.clearTimeout` on the id returned by this function. This
    *         will cause its dispose listener not to get cleaned up! Please use
-   *         {@link Component#clearTimeout} or {@link Component#dispose}.
+   *         {@link Component#clearTimeout} or {@link Component#dispose} instead.
    *
    * @param {Component~GenericCallback} fn
    *        The function that will be run after `timeout`.
@@ -23009,10 +23064,18 @@ var Component = function () {
   Component.prototype.setTimeout = function setTimeout(fn, timeout) {
     var _this2 = this;
 
+    // declare as variables so they are properly available in timeout function
+    // eslint-disable-next-line
+    var timeoutId, disposeFn;
+
     fn = bind(this, fn);
 
-    var timeoutId = window.setTimeout(fn, timeout);
-    var disposeFn = function disposeFn() {
+    timeoutId = window.setTimeout(function () {
+      _this2.off('dispose', disposeFn);
+      fn();
+    }, timeout);
+
+    disposeFn = function disposeFn() {
       return _this2.clearTimeout(timeoutId);
     };
 
@@ -23151,11 +23214,19 @@ var Component = function () {
   Component.prototype.requestAnimationFrame = function requestAnimationFrame(fn) {
     var _this4 = this;
 
+    // declare as variables so they are properly available in rAF function
+    // eslint-disable-next-line
+    var id, disposeFn;
+
     if (this.supportsRaf_) {
       fn = bind(this, fn);
 
-      var id = window.requestAnimationFrame(fn);
-      var disposeFn = function disposeFn() {
+      id = window.requestAnimationFrame(function () {
+        _this4.off('dispose', disposeFn);
+        fn();
+      });
+
+      disposeFn = function disposeFn() {
         return _this4.cancelAnimationFrame(id);
       };
 
@@ -25694,9 +25765,8 @@ var TextTrack = function (_Track) {
       // Accessing this.activeCues for the side-effects of updating itself
       // due to it's nature as a getter function. Do not remove or cues will
       // stop updating!
-      /* eslint-disable no-unused-expressions */
-      this.activeCues;
-      /* eslint-enable no-unused-expressions */
+      // Use the setter to prevent deletion from uglify (pure_getters rule)
+      this.activeCues = this.activeCues;
       if (changed) {
         this.trigger('cuechange');
         changed = false;
@@ -25828,6 +25898,9 @@ var TextTrack = function (_Track) {
 
         return activeCues;
       },
+
+
+      // /!\ Keep this setter empty (see the timeupdate handler above)
       set: function set$$1() {}
     });
 
@@ -27395,7 +27468,15 @@ ALL.names.forEach(function (name) {
 Tech.prototype.featuresVolumeControl = true;
 
 /**
- * Boolean indicating wether the `Tech` support fullscreen resize control.
+ * Boolean indicating whether the `Tech` supports muting volume.
+ *
+ * @type {bolean}
+ * @default
+ */
+Tech.prototype.featuresMuteControl = true;
+
+/**
+ * Boolean indicating whether the `Tech` supports fullscreen resize control.
  * Resizing plugins using request fullscreen reloads the plugin
  *
  * @type {boolean}
@@ -27839,6 +27920,12 @@ function setSourceHelper() {
     // then call the mw's setSource method
   } else if (mwFactory) {
     var mw = getOrCreateFactory(player, mwFactory);
+
+    // if setSource isn't present, implicitly select this middleware
+    if (!mw.setSource) {
+      acc.push(mw);
+      return setSourceHelper(src, mwrest, next, player, acc, lastRun);
+    }
 
     mw.setSource(assign({}, src), function (err, _src) {
 
@@ -28497,7 +28584,7 @@ var PosterImage = function (_ClickableComponent) {
     }
 
     if (this.player_.paused()) {
-      this.player_.play();
+      silencePromise(this.player_.play());
     } else {
       this.player_.pause();
     }
@@ -28530,20 +28617,27 @@ var fontMap = {
  * Construct an rgba color from a given hex color code.
  *
  * @param {number} color
- *        Hex number for color, like #f0e.
+ *        Hex number for color, like #f0e or #f604e2.
  *
  * @param {number} opacity
  *        Value for opacity, 0.0 - 1.0.
  *
  * @return {string}
  *         The rgba color that was created, like 'rgba(255, 0, 0, 0.3)'.
- *
- * @private
  */
 function constructColor(color, opacity) {
-  return 'rgba(' +
-  // color looks like "#f0e"
-  parseInt(color[1] + color[1], 16) + ',' + parseInt(color[2] + color[2], 16) + ',' + parseInt(color[3] + color[3], 16) + ',' + opacity + ')';
+  var hex = void 0;
+
+  if (color.length === 4) {
+    // color looks like "#f0e"
+    hex = color[1] + color[1] + color[2] + color[2] + color[3] + color[3];
+  } else if (color.length === 7) {
+    // color looks like "#f604e2"
+    hex = color.slice(1);
+  } else {
+    throw new Error('Invalid color code provided, ' + color + '; must be formatted as e.g. #f0e or #f604e2.');
+  }
+  return 'rgba(' + parseInt(hex.slice(0, 2), 16) + ',' + parseInt(hex.slice(2, 4), 16) + ',' + parseInt(hex.slice(4, 6), 16) + ',' + opacity + ')';
 }
 
 /**
@@ -29102,6 +29196,7 @@ var BigPlayButton = function (_Button) {
 
     // exit early if clicked via the mouse
     if (this.mouseused_ && event.clientX && event.clientY) {
+      silencePromise(playPromise);
       return;
     }
 
@@ -30232,7 +30327,16 @@ var Slider = function (_Component) {
   Slider.prototype.handleMouseDown = function handleMouseDown(event) {
     var doc = this.bar.el_.ownerDocument;
 
-    event.preventDefault();
+    if (event.type === 'mousedown') {
+      event.preventDefault();
+    }
+    // Do not call preventDefault() on touchstart in Chrome
+    // to avoid console warnings. Use a 'touch-action: none' style
+    // instead to prevent unintented scrolling.
+    // https://developers.google.com/web/updates/2017/01/scrolling-intervention
+    if (event.type === 'touchstart' && !IS_CHROME) {
+      event.preventDefault();
+    }
     blockTextSelection();
 
     this.addClass('vjs-sliding');
@@ -31491,6 +31595,10 @@ var FullscreenToggle = function (_Button) {
     var _this = possibleConstructorReturn(this, _Button.call(this, player, options));
 
     _this.on(player, 'fullscreenchange', _this.handleFullscreenChange);
+
+    if (document[FullscreenApi.fullscreenEnabled] === false) {
+      _this.disable();
+    }
     return _this;
   }
 
@@ -31987,6 +32095,33 @@ VolumeControl.prototype.options_ = {
 Component.registerComponent('VolumeControl', VolumeControl);
 
 /**
+ * Check if muting volume is supported and if it isn't hide the mute toggle
+ * button.
+ *
+ * @param {Component} self
+ *        A reference to the mute toggle button
+ *
+ * @param {Player} player
+ *        A reference to the player
+ *
+ * @private
+ */
+var checkMuteSupport = function checkMuteSupport(self, player) {
+  // hide mute toggle button if it's not supported by the current tech
+  if (player.tech_ && !player.tech_.featuresMuteControl) {
+    self.addClass('vjs-hidden');
+  }
+
+  self.on(player, 'loadstart', function () {
+    if (!player.tech_.featuresMuteControl) {
+      self.addClass('vjs-hidden');
+    } else {
+      self.removeClass('vjs-hidden');
+    }
+  });
+};
+
+/**
  * @file mute-toggle.js
  */
 /**
@@ -32013,7 +32148,7 @@ var MuteToggle = function (_Button) {
     // hide this control if volume support is missing
     var _this = possibleConstructorReturn(this, _Button.call(this, player, options));
 
-    checkVolumeSupport(_this, player);
+    checkMuteSupport(_this, player);
 
     _this.on(player, ['loadstart', 'volumechange'], _this.update);
     return _this;
@@ -32092,6 +32227,13 @@ var MuteToggle = function (_Button) {
   MuteToggle.prototype.updateIcon_ = function updateIcon_() {
     var vol = this.player_.volume();
     var level = 3;
+
+    // in iOS when a player is loaded with muted attribute
+    // and volume is changed with a native mute button
+    // we want to make sure muted state is updated
+    if (IS_IOS) {
+      this.player_.muted(this.player_.tech_.el_.muted);
+    }
 
     if (vol === 0 || this.player_.muted()) {
       level = 0;
@@ -32181,10 +32323,9 @@ var VolumePanel = function (_Component) {
       options.volumeControl.vertical = !options.inline;
     }
 
-    // hide this control if volume support is missing
     var _this = possibleConstructorReturn(this, _Component.call(this, player, options));
 
-    checkVolumeSupport(_this, player);
+    _this.on(player, ['loadstart'], _this.volumePanelState_);
 
     // while the slider is active (the mouse has been pressed down and
     // is dragging) we do not want to hide the VolumeBar
@@ -32216,6 +32357,29 @@ var VolumePanel = function (_Component) {
 
   VolumePanel.prototype.sliderInactive_ = function sliderInactive_() {
     this.removeClass('vjs-slider-active');
+  };
+
+  /**
+   * Adds vjs-hidden or vjs-mute-toggle-only to the VolumePanel
+   * depending on MuteToggle and VolumeControl state
+   *
+   * @listens Player#loadstart
+   * @private
+   */
+
+
+  VolumePanel.prototype.volumePanelState_ = function volumePanelState_() {
+    // hide volume panel if neither volume control or mute toggle
+    // are displayed
+    if (this.volumeControl.hasClass('vjs-hidden') && this.muteToggle.hasClass('vjs-hidden')) {
+      this.addClass('vjs-hidden');
+    }
+
+    // if only mute toggle is visible we don't want
+    // volume panel expanding when hovered or active
+    if (this.volumeControl.hasClass('vjs-hidden') && !this.muteToggle.hasClass('vjs-hidden')) {
+      this.addClass('vjs-mute-toggle-only');
+    }
   };
 
   /**
@@ -32954,13 +33118,16 @@ var MenuItem = function (_ClickableComponent) {
 
     _this.selectable = options.selectable;
     _this.isSelected_ = options.selected || false;
+    _this.multiSelectable = options.multiSelectable;
 
     _this.selected(_this.isSelected_);
 
     if (_this.selectable) {
-      // TODO: May need to be either menuitemcheckbox or menuitemradio,
-      //       and may need logical grouping of menu items.
-      _this.el_.setAttribute('role', 'menuitemcheckbox');
+      if (_this.multiSelectable) {
+        _this.el_.setAttribute('role', 'menuitemcheckbox');
+      } else {
+        _this.el_.setAttribute('role', 'menuitemradio');
+      }
     } else {
       _this.el_.setAttribute('role', 'menuitem');
     }
@@ -32996,7 +33163,7 @@ var MenuItem = function (_ClickableComponent) {
   };
 
   /**
-   * Any click on a `MenuItem` puts int into the selected state.
+   * Any click on a `MenuItem` puts it into the selected state.
    * See {@link ClickableComponent#handleClick} for instances where this is called.
    *
    * @param {EventTarget~Event} event
@@ -33271,6 +33438,8 @@ var OffTextTrackMenuItem = function (_TextTrackMenuItem) {
 
     // MenuItem is selectable
     options.selectable = true;
+    // MenuItem is NOT multiSelectable (i.e. only one can be marked "selected" at a time)
+    options.multiSelectable = false;
 
     return possibleConstructorReturn(this, _TextTrackMenuItem.call(this, player, options));
   }
@@ -33405,7 +33574,9 @@ var TextTrackButton = function (_TrackButton) {
         var item = new TrackMenuItem(this.player_, {
           track: track,
           // MenuItem is selectable
-          selectable: true
+          selectable: true,
+          // MenuItem is NOT multiSelectable (i.e. only one can be marked "selected" at a time)
+          multiSelectable: false
         });
 
         item.addClass('vjs-' + track.kind + '-menu-item');
@@ -33451,6 +33622,7 @@ var ChaptersTrackMenuItem = function (_MenuItem) {
 
     // Modify options for parent MenuItem class's init.
     options.selectable = true;
+    options.multiSelectable = false;
     options.label = cue.text;
     options.selected = cue.startTime <= currentTime && currentTime < cue.endTime;
 
@@ -34213,6 +34385,8 @@ var AudioTrackMenuItem = function (_MenuItem) {
 
     _this.track = track;
 
+    _this.addClass('vjs-' + track.kind + '-menu-item');
+
     var changeHandler = function changeHandler() {
       for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
         args[_key] = arguments[_key];
@@ -34227,6 +34401,22 @@ var AudioTrackMenuItem = function (_MenuItem) {
     });
     return _this;
   }
+
+  AudioTrackMenuItem.prototype.createEl = function createEl(type, props, attrs) {
+    var innerHTML = '<span class="vjs-menu-item-text">' + this.localize(this.options_.label);
+
+    if (this.options_.track.kind === 'main-desc') {
+      innerHTML += '\n        <span aria-hidden="true" class="vjs-icon-placeholder"></span>\n        <span class="vjs-control-text"> ' + this.localize('Descriptions') + '</span>\n      ';
+    }
+
+    innerHTML += '</span>';
+
+    var el = _MenuItem.prototype.createEl.call(this, type, assign({
+      innerHTML: innerHTML
+    }, props), attrs);
+
+    return el;
+  };
 
   /**
    * This gets called when an `AudioTrackMenuItem is "clicked". See {@link ClickableComponent}
@@ -34343,7 +34533,9 @@ var AudioTrackButton = function (_TrackButton) {
       items.push(new AudioTrackMenuItem(this.player_, {
         track: track,
         // MenuItem is selectable
-        selectable: true
+        selectable: true,
+        // MenuItem is NOT multiSelectable (i.e. only one can be marked "selected" at a time)
+        multiSelectable: false
       }));
     }
 
@@ -34395,6 +34587,7 @@ var PlaybackRateMenuItem = function (_MenuItem) {
     options.label = label;
     options.selected = rate === 1;
     options.selectable = true;
+    options.multiSelectable = false;
 
     var _this = possibleConstructorReturn(this, _MenuItem.call(this, player, options));
 
@@ -36780,6 +36973,33 @@ Html5.canControlVolume = function () {
 };
 
 /**
+ * Check if the volume can be muted in this browser/device.
+ * Some devices, e.g. iOS, don't allow changing volume
+ * but permits muting/unmuting.
+ *
+ * @return {bolean}
+ *      - True if volume can be muted
+ *      - False otherwise
+ */
+Html5.canMuteVolume = function () {
+  try {
+    var muted = Html5.TEST_VID.muted;
+
+    // in some versions of iOS muted property doesn't always
+    // work, so we want to set both property and attribute
+    Html5.TEST_VID.muted = !muted;
+    if (Html5.TEST_VID.muted) {
+      setAttribute(Html5.TEST_VID, 'muted', 'muted');
+    } else {
+      removeAttribute(Html5.TEST_VID, 'muted', 'muted');
+    }
+    return muted !== Html5.TEST_VID.muted;
+  } catch (e) {
+    return false;
+  }
+};
+
+/**
  * Check if the playback rate can be changed in this browser/device.
  *
  * @return {boolean}
@@ -36839,7 +37059,7 @@ Html5.canOverrideAttributes = function () {
  *         - False otherwise
  */
 Html5.supportsNativeTextTracks = function () {
-  return IS_ANY_SAFARI;
+  return IS_ANY_SAFARI || IS_IOS && IS_CHROME;
 };
 
 /**
@@ -36879,6 +37099,14 @@ Html5.Events = ['loadstart', 'suspend', 'abort', 'error', 'emptied', 'stalled', 
  * @default {@link Html5.canControlVolume}
  */
 Html5.prototype.featuresVolumeControl = Html5.canControlVolume();
+
+/**
+ * Boolean indicating whether the `Tech` supports muting volume.
+ *
+ * @type {bolean}
+ * @default {@link Html5.canMuteVolume}
+ */
+Html5.prototype.featuresMuteControl = Html5.canMuteVolume();
 
 /**
  * Boolean indicating whether the `Tech` supports changing the speed at which the media
@@ -38055,6 +38283,15 @@ var Player = function (_Component) {
     tag.controls = false;
     tag.removeAttribute('controls');
 
+    // the attribute overrides the option
+    if (tag.hasAttribute('autoplay')) {
+      _this.options_.autoplay = true;
+    } else {
+      // otherwise use the setter to validate and
+      // set the correct value.
+      _this.autoplay(_this.options_.autoplay);
+    }
+
     /*
      * Store the internal state of scrubbing
      *
@@ -38263,8 +38500,15 @@ var Player = function (_Component) {
       });
     }
 
-    // set tabindex to -1 so we could focus on the player element
+    // set tabindex to -1 to remove the video element from the focus order
     tag.setAttribute('tabindex', '-1');
+    // Workaround for #4583 (JAWS+IE doesn't announce BPB or play button)
+    // See https://github.com/FreedomScientific/VFO-standards-support/issues/78
+    // Note that we can't detect if JAWS is being used, but this ARIA attribute
+    //  doesn't change behavior of IE11 if JAWS is not being used
+    if (IE_VERSION) {
+      tag.setAttribute('role', 'application');
+    }
 
     // Remove width/height attrs from tag so CSS can make it 100% width/height
     tag.removeAttribute('width');
@@ -38612,13 +38856,17 @@ var Player = function (_Component) {
     // Turn off API access because we're loading a new tech that might load asynchronously
     this.isReady_ = false;
 
+    // if autoplay is a string we pass false to the tech
+    // because the player is going to handle autoplay on `loadstart`
+    var autoplay = typeof this.autoplay() === 'string' ? false : this.autoplay();
+
     // Grab tech-specific options from player options and add source and parent element to use.
     var techOptions = {
       source: source,
+      autoplay: autoplay,
       'nativeControlsForTouch': this.options_.nativeControlsForTouch,
       'playerId': this.id(),
       'techId': this.id() + '_' + titleTechName + '_api',
-      'autoplay': this.options_.autoplay,
       'playsinline': this.options_.playsinline,
       'preload': this.options_.preload,
       'loop': this.options_.loop,
@@ -38905,6 +39153,69 @@ var Player = function (_Component) {
       this.hasStarted(false);
       this.trigger('loadstart');
     }
+
+    // autoplay happens after loadstart for the browser,
+    // so we mimic that behavior
+    this.manualAutoplay_(this.autoplay());
+  };
+
+  /**
+   * Handle autoplay string values, rather than the typical boolean
+   * values that should be handled by the tech. Note that this is not
+   * part of any specification. Valid values and what they do can be
+   * found on the autoplay getter at Player#autoplay()
+   */
+
+
+  Player.prototype.manualAutoplay_ = function manualAutoplay_(type) {
+    var _this4 = this;
+
+    if (!this.tech_ || typeof type !== 'string') {
+      return;
+    }
+
+    var muted = function muted() {
+      var previouslyMuted = _this4.muted();
+
+      _this4.muted(true);
+
+      var playPromise = _this4.play();
+
+      if (!playPromise || !playPromise.then || !playPromise['catch']) {
+        return;
+      }
+
+      return playPromise['catch'](function (e) {
+        // restore old value of muted on failure
+        _this4.muted(previouslyMuted);
+      });
+    };
+
+    var promise = void 0;
+
+    if (type === 'any') {
+      promise = this.play();
+
+      if (promise && promise.then && promise['catch']) {
+        promise['catch'](function () {
+          return muted();
+        });
+      }
+    } else if (type === 'muted') {
+      promise = muted();
+    } else {
+      promise = this.play();
+    }
+
+    if (!promise || !promise.then || !promise['catch']) {
+      return;
+    }
+
+    return promise.then(function () {
+      _this4.trigger({ type: 'autoplay-success', autoplay: type });
+    })['catch'](function (e) {
+      _this4.trigger({ type: 'autoplay-failure', autoplay: type });
+    });
   };
 
   /**
@@ -38931,6 +39242,14 @@ var Player = function (_Component) {
       src = srcObj.src;
       type = srcObj.type;
     }
+
+    // if we are a blob url, don't update the source cache
+    // blob urls can arise when playback is done via Media Source Extension (MSE)
+    // such as m3u8 sources with @videojs/http-streaming (VHS)
+    if (/^blob:/.test(src)) {
+      return;
+    }
+
     // make sure all the caches are set to default values
     // to prevent null checking
     this.cache_.source = this.cache_.source || {};
@@ -38942,7 +39261,7 @@ var Player = function (_Component) {
     }
 
     // update `currentSource` cache always
-    this.cache_.source = { src: src, type: type };
+    this.cache_.source = mergeOptions({}, srcObj, { src: src, type: type });
 
     var matchingSources = this.cache_.sources.filter(function (s) {
       return s.src && s.src === src;
@@ -39013,7 +39332,7 @@ var Player = function (_Component) {
 
 
   Player.prototype.handleTechSourceset_ = function handleTechSourceset_(event) {
-    var _this4 = this;
+    var _this5 = this;
 
     // only update the source cache when the source
     // was not updated using the player api
@@ -39029,10 +39348,10 @@ var Player = function (_Component) {
       if (!event.src) {
         var updateCache = function updateCache(e) {
           if (e.type !== 'sourceset') {
-            _this4.updateSourceCaches_(_this4.techGet_('currentSrc'));
+            _this5.updateSourceCaches_(_this5.techGet_('currentSrc'));
           }
 
-          _this4.tech_.off(['sourceset', 'loadstart'], updateCache);
+          _this5.tech_.off(['sourceset', 'loadstart'], updateCache);
         };
 
         this.tech_.one(['sourceset', 'loadstart'], updateCache);
@@ -39146,7 +39465,7 @@ var Player = function (_Component) {
 
 
   Player.prototype.handleTechWaiting_ = function handleTechWaiting_() {
-    var _this5 = this;
+    var _this6 = this;
 
     this.addClass('vjs-waiting');
     /**
@@ -39157,7 +39476,7 @@ var Player = function (_Component) {
      */
     this.trigger('waiting');
     this.one('timeupdate', function () {
-      return _this5.removeClass('vjs-waiting');
+      return _this6.removeClass('vjs-waiting');
     });
   };
 
@@ -39269,7 +39588,7 @@ var Player = function (_Component) {
    * @fires Player#firstplay
    * @listens Tech#firstplay
    * @deprecated As of 6.0 firstplay event is deprecated.
-   * @deprecated As of 6.0 passing the `starttime` option to the player and the firstplay event are deprecated.
+   *             As of 6.0 passing the `starttime` option to the player and the firstplay event are deprecated.
    * @private
    */
 
@@ -39378,7 +39697,7 @@ var Player = function (_Component) {
     }
 
     if (this.paused()) {
-      this.play();
+      silencePromise(this.play());
     } else {
       this.pause();
     }
@@ -39636,14 +39955,43 @@ var Player = function (_Component) {
    * Attempt to begin playback at the first opportunity.
    *
    * @return {Promise|undefined}
-   *         Returns a `Promise` only if the browser returns one and the player
-   *         is ready to begin playback. For some browsers and all non-ready
-   *         situations, this will return `undefined`.
+   *         Returns a promise if the browser supports Promises (or one
+   *         was passed in as an option). This promise will be resolved on
+   *         the return value of play. If this is undefined it will fulfill the
+   *         promise chain otherwise the promise chain will be fulfilled when
+   *         the promise from play is fulfilled.
    */
 
 
   Player.prototype.play = function play() {
-    var _this6 = this;
+    var _this7 = this;
+
+    var PromiseClass = this.options_.Promise || window.Promise;
+
+    if (PromiseClass) {
+      return new PromiseClass(function (resolve) {
+        _this7.play_(resolve);
+      });
+    }
+
+    return this.play_();
+  };
+
+  /**
+   * The actual logic for play, takes a callback that will be resolved on the
+   * return value of play. This allows us to resolve to the play promise if there
+   * is one on modern browsers.
+   *
+   * @private
+   * @param {Function} [callback]
+   *        The callback that should be called when the techs play is actually called
+   */
+
+
+  Player.prototype.play_ = function play_() {
+    var _this8 = this;
+
+    var callback = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : silencePromise;
 
     // If this is called while we have a play queued up on a loadstart, remove
     // that listener to avoid getting in a potentially bad state.
@@ -39663,13 +40011,14 @@ var Player = function (_Component) {
 
       this.playWaitingForReady_ = true;
       this.ready(function () {
-        _this6.playWaitingForReady_ = false;
-        silencePromise(_this6.play());
+        _this8.playWaitingForReady_ = false;
+        callback(_this8.play());
       });
 
       // If the player/tech is ready and we have a source, we can attempt playback.
     } else if (!this.changingSrc_ && (this.src() || this.currentSrc())) {
-      return this.techGet_('play');
+      callback(this.techGet_('play'));
+      return;
 
       // If the tech is ready, but we do not have a source, we'll need to wait
       // for both the `ready` and a `loadstart` when the source is finally
@@ -39680,8 +40029,8 @@ var Player = function (_Component) {
     } else {
 
       this.playOnLoadstart_ = function () {
-        _this6.playOnLoadstart_ = null;
-        silencePromise(_this6.play());
+        _this8.playOnLoadstart_ = null;
+        callback(_this8.play());
       };
 
       this.one('loadstart', this.playOnLoadstart_);
@@ -40291,7 +40640,7 @@ var Player = function (_Component) {
 
 
   Player.prototype.selectSource = function selectSource(sources) {
-    var _this7 = this;
+    var _this9 = this;
 
     // Get only the techs specified in `techOrder` that exist and are supported by the
     // current platform
@@ -40340,7 +40689,7 @@ var Player = function (_Component) {
       var techName = _ref2[0],
           tech = _ref2[1];
 
-      if (tech.canPlaySource(source, _this7.options_[techName.toLowerCase()])) {
+      if (tech.canPlaySource(source, _this9.options_[techName.toLowerCase()])) {
         return { source: source, tech: techName };
       }
     };
@@ -40376,7 +40725,7 @@ var Player = function (_Component) {
 
 
   Player.prototype.src = function src(source) {
-    var _this8 = this;
+    var _this10 = this;
 
     // getter usage
     if (typeof source === 'undefined') {
@@ -40404,35 +40753,35 @@ var Player = function (_Component) {
 
     // middlewareSource is the source after it has been changed by middleware
     setSource(this, sources[0], function (middlewareSource, mws) {
-      _this8.middleware_ = mws;
+      _this10.middleware_ = mws;
 
       // since sourceSet is async we have to update the cache again after we select a source since
       // the source that is selected could be out of order from the cache update above this callback.
-      _this8.cache_.sources = sources;
-      _this8.updateSourceCaches_(middlewareSource);
+      _this10.cache_.sources = sources;
+      _this10.updateSourceCaches_(middlewareSource);
 
-      var err = _this8.src_(middlewareSource);
+      var err = _this10.src_(middlewareSource);
 
       if (err) {
         if (sources.length > 1) {
-          return _this8.src(sources.slice(1));
+          return _this10.src(sources.slice(1));
         }
 
-        _this8.changingSrc_ = false;
+        _this10.changingSrc_ = false;
 
         // We need to wrap this in a timeout to give folks a chance to add error event handlers
-        _this8.setTimeout(function () {
+        _this10.setTimeout(function () {
           this.error({ code: 4, message: this.localize(this.options_.notSupportedMessage) });
         }, 0);
 
         // we could not find an appropriate tech, but let's still notify the delegate that this is it
         // this needs a better comment about why this is needed
-        _this8.triggerReady();
+        _this10.triggerReady();
 
         return;
       }
 
-      setTech(mws, _this8.tech_);
+      setTech(mws, _this10.tech_);
     });
   };
 
@@ -40452,7 +40801,7 @@ var Player = function (_Component) {
 
 
   Player.prototype.src_ = function src_(source) {
-    var _this9 = this;
+    var _this11 = this;
 
     var sourceTech = this.selectSource([source]);
 
@@ -40465,7 +40814,7 @@ var Player = function (_Component) {
       // load this technology with the chosen source
       this.loadTech_(sourceTech.tech, sourceTech.source);
       this.tech_.ready(function () {
-        _this9.changingSrc_ = false;
+        _this11.changingSrc_ = false;
       });
       return false;
     }
@@ -40506,6 +40855,9 @@ var Player = function (_Component) {
 
 
   Player.prototype.reset = function reset() {
+    if (this.tech_) {
+      this.tech_.clearTracks('text');
+    }
     this.loadTech_(this.options_.techOrder[0], null);
     this.techCall_('reset');
   };
@@ -40591,24 +40943,56 @@ var Player = function (_Component) {
   };
 
   /**
-   * Get or set the autoplay attribute.
+   * Get or set the autoplay option. When this is a boolean it will
+   * modify the attribute on the tech. When this is a string the attribute on
+   * the tech will be removed and `Player` will handle autoplay on loadstarts.
    *
-   * @param {boolean} [value]
-   *        - true means that we should autoplay
-   *        - false means that we should not autoplay
+   * @param {boolean|string} [value]
+   *        - true: autoplay using the browser behavior
+   *        - false: do not autoplay
+   *        - 'play': call play() on every loadstart
+   *        - 'muted': call muted() then play() on every loadstart
+   *        - 'any': call play() on every loadstart. if that fails call muted() then play().
+   *        - *: values other than those listed here will be set `autoplay` to true
    *
-   * @return {string}
+   * @return {boolean|string}
    *         The current value of autoplay when getting
    */
 
 
   Player.prototype.autoplay = function autoplay(value) {
-    if (value !== undefined) {
-      this.techCall_('setAutoplay', value);
-      this.options_.autoplay = value;
-      return;
+    // getter usage
+    if (value === undefined) {
+      return this.options_.autoplay || false;
     }
-    return this.techGet_('autoplay', value);
+
+    var techAutoplay = void 0;
+
+    // if the value is a valid string set it to that
+    if (typeof value === 'string' && /(any|play|muted)/.test(value)) {
+      this.options_.autoplay = value;
+      this.manualAutoplay_(value);
+      techAutoplay = false;
+
+      // any falsy value sets autoplay to false in the browser,
+      // lets do the same
+    } else if (!value) {
+      this.options_.autoplay = false;
+
+      // any other value (ie truthy) sets autoplay to true
+    } else {
+      this.options_.autoplay = true;
+    }
+
+    techAutoplay = techAutoplay || this.options_.autoplay;
+
+    // if we don't have a tech then we do not queue up
+    // a setAutoplay call on tech ready. We do this because the
+    // autoplay option will be passed in the constructor and we
+    // do not need to set it twice
+    if (this.tech_) {
+      this.techCall_('setAutoplay', techAutoplay);
+    }
   };
 
   /**
@@ -41343,7 +41727,7 @@ var Player = function (_Component) {
 
 
   Player.prototype.createModal = function createModal(content, options) {
-    var _this10 = this;
+    var _this12 = this;
 
     options = options || {};
     options.content = content || '';
@@ -41352,7 +41736,7 @@ var Player = function (_Component) {
 
     this.addChild(modal);
     modal.on('dispose', function () {
-      _this10.removeChild(modal);
+      _this12.removeChild(modal);
     });
 
     modal.open();
@@ -42773,6 +43157,20 @@ videojs.bind = bind;
 videojs.registerPlugin = Plugin.registerPlugin;
 
 /**
+ * Deregister a Video.js plugin.
+ *
+ * @borrows plugin:deregisterPlugin as videojs.deregisterPlugin
+ * @method deregisterPlugin
+ *
+ * @param  {string} name
+ *         The name of the plugin to be deregistered. Must be a string and
+ *         must match an existing plugin or a method on the `Player`
+ *         prototype.
+ *
+ */
+videojs.deregisterPlugin = Plugin.deregisterPlugin;
+
+/**
  * Deprecated method to register a plugin with Video.js
  *
  * @deprecated
@@ -43139,7 +43537,7 @@ videojs.url = Url;
 
 module.exports = videojs;
 
-},{"global/document":30,"global/window":31,"safe-json-parse/tuple":67,"tsml":69,"videojs-vtt.js":84,"xhr":89}],72:[function(require,module,exports){
+},{"global/document":30,"global/window":31,"safe-json-parse/tuple":68,"tsml":70,"videojs-vtt.js":85,"xhr":90}],73:[function(require,module,exports){
 /**
  * @file add-text-track-data.js
  */
@@ -43290,7 +43688,7 @@ exports['default'] = {
   durationOfVideo: durationOfVideo
 };
 module.exports = exports['default'];
-},{"global/window":31,"video.js":71}],73:[function(require,module,exports){
+},{"global/window":31,"video.js":72}],74:[function(require,module,exports){
 /**
  * @file codec-utils.js
  */
@@ -43378,7 +43776,7 @@ exports['default'] = {
   translateLegacyCodecs: translateLegacyCodecs
 };
 module.exports = exports['default'];
-},{}],74:[function(require,module,exports){
+},{}],75:[function(require,module,exports){
 /**
  * @file create-text-tracks-if-necessary.js
  */
@@ -43439,7 +43837,7 @@ var createTextTracksIfNecessary = function createTextTracksIfNecessary(sourceBuf
 
 exports['default'] = createTextTracksIfNecessary;
 module.exports = exports['default'];
-},{}],75:[function(require,module,exports){
+},{}],76:[function(require,module,exports){
 /**
  * @file flash-constants.js
  */
@@ -43466,7 +43864,7 @@ var flashConstants = {
 
 exports["default"] = flashConstants;
 module.exports = exports["default"];
-},{}],76:[function(require,module,exports){
+},{}],77:[function(require,module,exports){
 /**
  * @file flash-media-source.js
  */
@@ -43672,7 +44070,7 @@ for (var property in _flashConstants2['default']) {
   FlashMediaSource[property] = _flashConstants2['default'][property];
 }
 module.exports = exports['default'];
-},{"./codec-utils":73,"./flash-constants":75,"./flash-source-buffer":77,"global/document":30,"video.js":71}],77:[function(require,module,exports){
+},{"./codec-utils":74,"./flash-constants":76,"./flash-source-buffer":78,"global/document":30,"video.js":72}],78:[function(require,module,exports){
 /**
  * @file flash-source-buffer.js
  */
@@ -44304,7 +44702,7 @@ var FlashSourceBuffer = (function (_videojs$EventTarget) {
 
 exports['default'] = FlashSourceBuffer;
 module.exports = exports['default'];
-},{"./add-text-track-data":72,"./create-text-tracks-if-necessary":74,"./flash-constants":75,"./flash-transmuxer-worker":78,"./remove-cues-from-track":80,"global/window":31,"mux.js/lib/flv":46,"video.js":71,"webwackify":88}],78:[function(require,module,exports){
+},{"./add-text-track-data":73,"./create-text-tracks-if-necessary":75,"./flash-constants":76,"./flash-transmuxer-worker":79,"./remove-cues-from-track":81,"global/window":31,"mux.js/lib/flv":47,"video.js":72,"webwackify":89}],79:[function(require,module,exports){
 /**
  * @file flash-transmuxer-worker.js
  */
@@ -44454,7 +44852,7 @@ exports['default'] = function (self) {
 };
 
 module.exports = exports['default'];
-},{"global/window":31,"mux.js/lib/flv":46}],79:[function(require,module,exports){
+},{"global/window":31,"mux.js/lib/flv":47}],80:[function(require,module,exports){
 /**
  * @file html-media-source.js
  */
@@ -44831,7 +45229,7 @@ var HtmlMediaSource = (function (_videojs$EventTarget) {
 
 exports['default'] = HtmlMediaSource;
 module.exports = exports['default'];
-},{"./add-text-track-data":72,"./codec-utils":73,"./virtual-source-buffer":83,"global/document":30,"global/window":31,"video.js":71}],80:[function(require,module,exports){
+},{"./add-text-track-data":73,"./codec-utils":74,"./virtual-source-buffer":84,"global/document":30,"global/window":31,"video.js":72}],81:[function(require,module,exports){
 /**
  * @file remove-cues-from-track.js
  */
@@ -44875,7 +45273,7 @@ var removeCuesFromTrack = function removeCuesFromTrack(start, end, track) {
 
 exports["default"] = removeCuesFromTrack;
 module.exports = exports["default"];
-},{}],81:[function(require,module,exports){
+},{}],82:[function(require,module,exports){
 /**
  * @file transmuxer-worker.js
  */
@@ -45096,7 +45494,7 @@ exports['default'] = function (self) {
 };
 
 module.exports = exports['default'];
-},{"global/window":31,"mux.js/lib/mp4":55}],82:[function(require,module,exports){
+},{"global/window":31,"mux.js/lib/mp4":56}],83:[function(require,module,exports){
 /**
  * @file videojs-contrib-media-sources.js
  */
@@ -45253,7 +45651,7 @@ var URL = {
 exports.URL = URL;
 _videoJs2['default'].MediaSource = MediaSource;
 _videoJs2['default'].URL = URL;
-},{"./flash-media-source":76,"./html-media-source":79,"global/window":31,"video.js":71}],83:[function(require,module,exports){
+},{"./flash-media-source":77,"./html-media-source":80,"global/window":31,"video.js":72}],84:[function(require,module,exports){
 /**
  * @file virtual-source-buffer.js
  */
@@ -46081,7 +46479,7 @@ var VirtualSourceBuffer = (function (_videojs$EventTarget) {
 })(_videoJs2['default'].EventTarget);
 
 exports['default'] = VirtualSourceBuffer;
-},{"./add-text-track-data":72,"./codec-utils":73,"./create-text-tracks-if-necessary":74,"./remove-cues-from-track":80,"./transmuxer-worker":81,"video.js":71,"webwackify":88}],84:[function(require,module,exports){
+},{"./add-text-track-data":73,"./codec-utils":74,"./create-text-tracks-if-necessary":75,"./remove-cues-from-track":81,"./transmuxer-worker":82,"video.js":72,"webwackify":89}],85:[function(require,module,exports){
 /**
  * Copyright 2013 vtt.js Contributors
  *
@@ -46133,7 +46531,7 @@ if (!window.VTTCue) {
   vttjs.shim();
 }
 
-},{"./vtt.js":85,"./vttcue.js":86,"./vttregion.js":87,"global/window":31}],85:[function(require,module,exports){
+},{"./vtt.js":86,"./vttcue.js":87,"./vttregion.js":88,"global/window":31}],86:[function(require,module,exports){
 /**
  * Copyright 2013 vtt.js Contributors
  *
@@ -47464,7 +47862,7 @@ WebVTT.Parser.prototype = {
 
 module.exports = WebVTT;
 
-},{}],86:[function(require,module,exports){
+},{}],87:[function(require,module,exports){
 /**
  * Copyright 2013 vtt.js Contributors
  *
@@ -47771,7 +48169,7 @@ VTTCue.prototype.getCueAsHTML = function() {
 
 module.exports = VTTCue;
 
-},{}],87:[function(require,module,exports){
+},{}],88:[function(require,module,exports){
 /**
  * Copyright 2013 vtt.js Contributors
  *
@@ -47907,7 +48305,7 @@ function VTTRegion() {
 
 module.exports = VTTRegion;
 
-},{}],88:[function(require,module,exports){
+},{}],89:[function(require,module,exports){
 // By default assume browserify was used to bundle app. These arguments are passed to
 // the module by browserify.
 var bundleFn = arguments[3];
@@ -48119,7 +48517,7 @@ module.exports = function webwackify(fn, fnModuleId) {
   return worker;
 };
 
-},{}],89:[function(require,module,exports){
+},{}],90:[function(require,module,exports){
 "use strict";
 var window = require("global/window")
 var isFunction = require("is-function")
@@ -48362,7 +48760,7 @@ function getXml(xhr) {
 
 function noop() {}
 
-},{"global/window":31,"is-function":32,"parse-headers":63,"xtend":90}],90:[function(require,module,exports){
+},{"global/window":31,"is-function":33,"parse-headers":64,"xtend":91}],91:[function(require,module,exports){
 module.exports = extend
 
 var hasOwnProperty = Object.prototype.hasOwnProperty;
@@ -48383,7 +48781,7 @@ function extend() {
     return target
 }
 
-},{}],91:[function(require,module,exports){
+},{}],92:[function(require,module,exports){
 /* eslint-disable no-var */
 /* eslint-env qunit */
 var hls = require('../es5/videojs-contrib-hls.js');
@@ -48394,4 +48792,4 @@ q.test('hls should be requirable and bundled via browserify', function(assert) {
   assert.ok(hls, 'videoj-contrib-hls is required properly');
 });
 
-},{"../es5/videojs-contrib-hls.js":20}]},{},[91]);
+},{"../es5/videojs-contrib-hls.js":20}]},{},[92]);
